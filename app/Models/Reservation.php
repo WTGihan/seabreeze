@@ -862,4 +862,42 @@ class Reservation extends Connection {
      return $users; 
     }
 
+    public function searchBanquet($id, $session_date, $session_type) {
+        $this->banquet_hall_id = mysqli_real_escape_string($this->connection, $id);
+        $this->banquet_session_date = mysqli_real_escape_string($this->connection, $session_date);
+        
+        echo "tharindu";
+        die();
+        if($session_type === "both" ) {
+            $session_type1 = "morning";
+            $session_type2 = "evening";
+            $session_type3 = "both";
+            $query = "SELECT * FROM $this->banquet_table
+                WHERE hall_id = '{$this->banquet_hall_id}' and 
+                session_date = '{$this->banquet_session_date}' and 
+                (session_type = '{$session_type1}' OR  session_type = '{$session_type2}' OR session_type = '{$session_type3}')
+                LIMIT 1";
+        }
+        else {
+            $this->banquet_session_type = mysqli_real_escape_string($this->connection, $session_type);
+            $query = "SELECT * FROM $this->banquet_table
+                WHERE hall_id = '{$this->banquet_hall_id}' and 
+                session_date = '{$this->banquet_session_date}' and 
+                session_type = '{$this->banquet_session_type}'  
+                LIMIT 1";
+        }
+
+        $result = 0;
+        $result_set = mysqli_query($this->connection, $query);
+        if($result_set){
+            if(mysqli_num_rows($result_set) == 1) {
+                $result = 1;
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+        return $result;
+    }
+
 }

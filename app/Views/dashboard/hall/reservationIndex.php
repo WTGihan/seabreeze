@@ -10,8 +10,8 @@
       
    <?php 
    
-       $navbar_title = " Payment Reports ";
-       $search = 0;
+       $navbar_title = "Rooms Reservations ";
+       $search = 1;
        $search_by = 'Room Number';
        $url = "reservation/details";
        
@@ -25,91 +25,46 @@
            <div class="card">
                <div class="cardheader">
                    <div class="options">
-                       <h4>All Payment Report Page  
+                       <h4>All Room Reservations Page  
                        <span>
                             <?php if($_SESSION['user_level'] != "Owner"): ?>
-                                <a href="<?php url("report/index"); ?>" class="addnew"><i class="material-icons">add_circle</i></a> 
+                                <a href="<?php url("reservation/index"); ?>" class="addnew"><i class="material-icons">add_circle</i></a> 
                             <?php endif; ?>
-                            <a href="<?php url("report/details"); ?>" class="refresh"><i class="material-icons">loop</i></a> 
+                            <a href="<?php url("reservation/details"); ?>" class="refresh"><i class="material-icons">loop</i></a> 
                        </span> 
                         
                        </h4>
                    </div>
-                   <p class="textfortabel"> Payment details view Following Table</p>
+                   <p class="textfortabel">Rooms Reservations View Following Table</p>
                </div>
                <div class="cardbody">
-
-               <div class="data">
-    
-
-
-    <!-- <h3>Enter the duration to get Report</h2> -->
-        <!-- <form method="post" action="<?php url('report/pview');?>">
-    
-            <input type="date" name="start_date">
-            <input type="date" name="end_date"> -->
-            <!-- <button type="submit" name="generate" class="submit" value="Generate the report">Generate</button> -->
-
- 
-            
-            <!-- <h3>Enter the month to get Report</h3> -->
-
-            <!-- <input type="text" name="month"> -->
-            <!-- <button type="submit" name="generate1" class="submit" value="Generate the report">Generate</button> -->
-
-            <!-- <h3>Enter the year to get Report</h3> -->
-
-            <!-- <input type="text" name="year"> -->
-            <!-- <button type="submit" name="generate2" class="submit" value="Generate the report">Generate</button> -->
-    
-    
-      <!-- </form>
-       -->
-
-    <a href="<?php url('Report/viewPayment/'.$date);?>"> Create PDF</a>
-      </div>
-    
                <div class="tablebody">
                                 <table>
                                     <thead>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Contact Number</th>
-                                        <th>Room Description</th>
-                                        <th>Amount</th>
-                                        <th>Currency</th>
-                                        <th>Create Date Time</th>
-                                        
+                                        <th>Room Number</th>
+                                        <th>Room Name</th>
+                                        <th>Room Price</th>
+                                        <th>No of Guest</th>
                                         <th>Check In Date</th>
                                         <th>Check Out Date</th>
-                                        <!--<th>Details</th>
+                                        <th>Details</th>
                                         <?php if($_SESSION['user_level'] == "Owner" ): ?>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         <?php endif; ?>
                                         <?php if($_SESSION['user_level'] != "Owner" ): ?>
                                             <th>Reservation</th>
-                                        <?php endif; ?>-->
+                                        <?php endif; ?>
                                                                                  
                                     </thead>
-<?php
-// var_dump($rooms);
-// exit;
-?>
-
 
                                     <?php foreach($rooms as $row): ?>
                                     <tbody>
                                         
-                                        <td><?php echo $row['first_name'];?></td>
-                                        <td><?php echo $row['last_name'];?></td>
-                                        <td><?php echo $row['contact_number'];?></td>
-                                        
-                                        <td><?php echo $row['roomdesc'];?></td>
-                                        <td><?php echo $row['amount'];?></td>
-                                        <td><?php echo $row['currency'];?></td>
-                                        <td><?php echo $row['created_at'];?></td>
-                                        
+                                        <td><?php echo $row['room_number'];?></td>
+                                        <td><?php echo $row['room_name'];?></td>
+                                        <td><?php echo $row['price'];?></td>
+                                        <td><?php echo $row['max_guest'];?></td>
                                         <td>
                                             <?php 
                                             // session_start();
@@ -155,7 +110,7 @@
                                             <?php } ?>
                                         </td>
 
-                                       <!-- <td><a href="<?php url('room/details/'.$row['room_number']);?>" class="edit"><i class="material-icons">preview</i></a></td>
+                                        <td><a href="<?php url('room/details/'.$row['room_number']);?>" class="edit"><i class="material-icons">preview</i></a></td>
                                         <?php if($_SESSION['user_level'] != "Owner" ): ?>
                                             <?php if($current_date < $row['check_out_date']) { ?>
                                                 <td><a href="#" onclick="return confirm('Can not Do Reservation Sorry!!?');" class="edit"><i class="material-icons">book_online</i></a></td>
@@ -174,7 +129,7 @@
                                         <?php endif; ?>
                                     </tbody>
                                 <?php endforeach ?> 
-                                </table>-->
+                                </table>
                            
                            </div>
                 </div>  <!--End Card Body -->
@@ -186,57 +141,3 @@
    
 
 <?php include(VIEWS.'dashboard/inc/footer.php'); ?>
-
-<?php  
-
-  include_once('connection.php');
-
-
-  if(isset($_POST['generate']))
-  {
-
-    // $txtStartDate=$_POST['start_date'];
-    // date_default_timezone_set("Asia/Colombo");
-    // $txtEndDat = date('Y-m-d');
-    
-
-    // $query=mysqli_query($connection,"SELECT first_name,last_name,contact_number,age,email,location,no_of_guest,payment_method,check_in_date,check_out_date FROM reservation INNER JOIN customer on reservation.customer_id=customer.customer_id WHERE check_in_date BETWEEN '$txtStartDate' and '$txtEndDate' order BY check_in_date");
-    // $count=mysqli_num_rows($query);
-
-
-
-
-
-  
-  }
-
-
-//   if(isset($_POST['generate1']))
-//   {
-
-    
-//     $txtmonth=$_POST['month'];
-
-//     $query1=mysqli_query($connection,"SELECT first_name,last_name,contact_number,age,email,location,no_of_guest,payment_method,check_in_date,check_out_date FROM reservation INNER JOIN customer on reservation.customer_id=customer.customer_id WHERE MONTH(check_in_date) ='$txtmonth'");
-//     $count1=mysqli_num_rows($query1);
-
-
-
-  
-//   }
-
-//   if(isset($_POST['generate2']))
-//   {
-
-    
-//     $txtyear=$_POST['year'];
-
-//     $query1=mysqli_query($connection,"SELECT first_name,last_name,contact_number,age,email,location,no_of_guest,payment_method,check_in_date,check_out_date FROM reservation INNER JOIN customer on reservation.customer_id=customer.customer_id WHERE YEAR(check_in_date) ='$txtyear'");
-//     $count2=mysqli_num_rows($query2);
-
-
-
-  
-//   }
-
-

@@ -10,7 +10,7 @@
       
    <?php 
    
-       $navbar_title = " Payment Report ";
+       $navbar_title = " Payment Reports ";
        $search = 0;
        $search_by = 'Room Number';
        $url = "reservation/details";

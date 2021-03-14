@@ -8,6 +8,22 @@
 
 </head>
 <body>
+	<?php 
+	
+		if(isset($errors) && !empty($errors)) {
+			echo '<script>alert("Enter Data is invalid")</script>';
+		}
+		
+		else {
+			if(isset($msg2)) {
+				echo '<script>alert("'.$msg2.'")</script>';
+			}
+			if(isset($roomAvailable['availability']) && $roomAvailable['availability'] == 0) {
+				echo '<script>alert("Hall is Not Available")</script>'; 
+			}
+		}
+				
+	?>
 
 	<?php include(VIEWS.'inc/header_navbar.php'); ?>
 

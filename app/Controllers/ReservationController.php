@@ -93,14 +93,7 @@ class ReservationController {
                 $data['img_details'] = $imageRoom;
                 $data['msg2'] = "Plaese login then Reserve Room";
                 View::load('room', $data);
-                // if($customer_id != 0) {
-                //     $customer = new Customer();
-                //     $customer_details = $customer->getCustomer($customer_id);
-                //     $reservation = array('first_name'=>$customer_details['first_name'], 'last_name'=>$customer_details['last_name'],'age'=>$customer_details['age'],'location'=>$customer_details['location'],'contact_number'=>$customer_details['contact_number'],'email'=>$customer_details['email'],'room_number'=>$room_number,'max_guest'=>$max_guest,'check_in_date'=>$check_in_date, 'check_out_date'=>$check_out_date);
-                // }
-                // else {
-                //     $reservation = array('room_number'=>$room_number,'max_guest'=>$max_guest,'check_in_date'=>$check_in_date, 'check_out_date'=>$check_out_date);
-                // }
+               
                 
             }
             
@@ -109,7 +102,7 @@ class ReservationController {
 
     public function indexOnlineOneRoom($room_number,$max_guest,$check_in_date,$check_out_date) {
        
-        if(isset($_SESSION['unreg_user_id'])) {
+        if(isset($_SESSION['unreg_user_id'])) { // if check user logged in unreg not mean unregistered
             // echo 
             if(isset($_POST['submitbooknow'])) {
                 
@@ -119,8 +112,7 @@ class ReservationController {
                 $user = new User();
                 $new_user = $user->getUserEmail($_SESSION['unreg_user_id']);
                 $user_email = $new_user['email'];
-            // var_dump($user_email);
-            // die();
+            
                 $room = new RoomDetails();
                 $room_details = $room->getOneRoomView($room_number);
                 // var_dump($room_details);
@@ -150,7 +142,7 @@ class ReservationController {
                     }
                     
                 // }
-            }
+              }
                 $no_of_rooms = $no_of_rooms - 1;
                 $no_of_guest = $no_of_guest- $max_guest;
             
@@ -273,17 +265,6 @@ class ReservationController {
     
     public function create($discountValue = 0, $check_inSearch = '0000-00-00', $check_outSearch = '0000-00-00', $typenameSearch="None",$no_of_rooms=0,$guest=0, $price = 0) {
 
-        // if(!isset($_SESSION['user_id'])) {
-        //     $dashboard = new DashboardController();
-        //     $dashboard->index();    
-        // }
-        // else if(!isset($_SESSION['id'])) {
-        //     $home = new HomeController();
-        //     $home->index();    
-        // }
-
-        // // create redirect page for homepage
-        // else {
             if(isset($_POST['submit'])) {
 
                 // Validation
@@ -917,12 +898,7 @@ class ReservationController {
     }
 
     public function paymentOnline($customer_id, $reservation_id) {
-        // if(!isset($_SESSION['user_id'])) {
-        //     // redirect should be home page
-        //     // $dashboard = new DashboardController();
-        //     // $dashboard->index();    
-        // }
-        // else {
+        
             $dbcustomer = new Customer();
             $customer = $dbcustomer->getCustomer($customer_id);
             

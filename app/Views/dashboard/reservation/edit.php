@@ -22,7 +22,7 @@
 
                 <div class="cardheader">
                     <div class="options">
-                        <h4>Edit Reservation 
+                        <h4>Edit Reservations
                         <span>
                             <a href="<?php url("reservation/details"); ?>" class="addnew"><i class="material-icons">reply_all</i></a>  
                         </span>
