@@ -23,7 +23,7 @@
 
                 <div class="cardheader">
                     <div class="options">
-                        <h4>New Reservation 
+                        <h4>New Reservations 
                         <span>
                         <?php if(isset($discount['value'])){ ?>
                             <!-- <a href="<?php //url("room/preview/".$details['check_in_date'].'/'.$details['check_out_date'].'/'.$details['type_name']) ?>" class="addnew"><i class="material-icons">reply_all</i></a>   -->

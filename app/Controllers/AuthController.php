@@ -71,16 +71,24 @@ class AuthController {
 
 						$reservation = new ReservationController();
 						$reservation->indexOnline($room_number,$max_guest,$check_in_date,$check_out_date,$rooms, $guest);
-						// var_dump($_SESSION['reservation_data']);
-						// var_dump($_SESSION['input_room_search_data']);
-						// $no_of_rooms = $_SESSION['no_of_rooms'];
-						// echo $no_of_rooms;
-						// print_r($_SESSION);
-						// die();
 						
-						
-						// unset($_SESSION['input_room_search_data']);
 					}
+					if(isset($_SESSION['unreg_session_date']) && isset($_SESSION['unreg_session_time'])&& isset($_SESSION['unreg_hall_id'])) {
+						$session_date = $_SESSION['unreg_session_date'];
+						$session_time = $_SESSION['unreg_session_time'];
+						$hall_id = $_SESSION['unreg_hall_id']; 
+						
+
+						unset($_SESSION['unreg_session_date']);
+						unset($_SESSION['unreg_session_time']);
+						unset($_SESSION['unreg_hall_id']);
+
+						$banquet = new BanquetController();
+						$banquet->indexOnline($session_date,$session_time,$hall_id);
+						
+
+					}
+
 					else {
 						$db = new RoomDetails();
 						$data['room_details'] = $db->getRoomView(); 

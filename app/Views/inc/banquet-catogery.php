@@ -109,6 +109,8 @@ ul#category-tabs li a i {
 					
 				</div>
 
+                <?php include(VIEWS.'inc/booking-formbanquet.php'); ?> 
+
 				<script type="text/javascript">
 		$('#category-tabs li a').click(function(){
 		$(this).next('ul').slideToggle('500');

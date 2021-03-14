@@ -25,9 +25,6 @@ class NotificationController {
             $data = array();
             if(isset($_POST['search'])) {
                 $search = $_POST['search'];
-                   // search process should be implemented
-                    // $data['rooms'] = $db->getSearchRoomAll($search);
-                    // view::load('dashboard/reservation/index', $data);
                 $data['rooms'] = $dbreservation->requestNotificationSearch($search);
                 view::load('dashboard/notification/reservationIndex', $data);
 
