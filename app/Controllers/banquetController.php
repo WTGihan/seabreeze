@@ -17,16 +17,16 @@ class BanquetController{
         View::load('sub/banquetView', $data);
     }
 
-    // public function selectOption() {
-    //     if(!isset($_SESSION['user_id'])) {
-    //         $dashboard = new DashboardController();
-    //         $dashboard->index();
-    //     }
-    //     else {
-    //         view::load('dashboard/hall/selectOption');
-    //     }
+    public function selectOption() {
+        if(!isset($_SESSION['user_id'])) {
+            $dashboard = new DashboardController();
+            $dashboard->index();
+        }
+        else {
+            view::load('dashboard/hall/selectOption');
+        }
 
-    // }
+    }
 
     // public function createIndex() {
     //     if(!isset($_SESSION['user_id'])) {
@@ -57,6 +57,29 @@ class BanquetController{
             else {
                 $data['rooms'] = $dbreservation->requestNotification();
                 view::load('dashboard/hall/reservationNotification', $data);
+            }
+        }
+    }
+
+    public function hallReservationIndex() {
+        if(!isset($_SESSION['user_id'])) {
+            $dashboard = new DashboardController();
+            $dashboard->index();
+        }
+        else {
+            $dbreservation = new HallBanquet();
+            
+            $data = array();
+            
+            if(isset($_POST['search'])) { //this must modify
+                $search = $_POST['search'];
+                $data['rooms'] = $dbreservation->allReservationDetailsSearch($search);
+                view::load('dashboard/hall/reservationIndex', $data);
+                
+            }
+            else {
+                $data['rooms'] = $dbreservation->allReservationDetails();
+                view::load('dashboard/hall/reservationIndex', $data);
             }
         }
     }
