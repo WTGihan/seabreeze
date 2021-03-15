@@ -11,7 +11,7 @@
    <?php 
    
        $navbar_title = "Hall Reservations ";
-       $search = 0;
+       $search = 1;
        $search_by = 'Hall Name';
        $url = "banquet/notificationIndex"; //must change
        
@@ -48,6 +48,8 @@
                                     <thead>
                                         <th>Hall Name</th>
                                         <th>Hall Price</th>
+                                        <th>Customer</th>
+                                        <th>Email</th>
                                         <th>Session Date</th>
                                         <th>Session Type</th>
                                         <th>Accept</th>
@@ -60,6 +62,8 @@
                                         
                                         <td><?php echo ucwords($row['name']);?></td>
                                         <td><?php echo $row['price'];?></td>
+                                        <td><?php echo $row['first_name'];?></td>
+                                        <td><?php echo $row['email'];?></td>
                                         <td>  
                                             <div class="in">
                                                 <?php  echo $row['session_date'];?>
