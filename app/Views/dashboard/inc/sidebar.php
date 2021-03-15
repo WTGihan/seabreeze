@@ -44,7 +44,7 @@
             </a>
         </li> 
         <li class="nav1-item">
-            <a href="<?php url('banquet/notificationIndex'); ?>" class="nav1-link">
+            <a href="<?php url('banquet/selectOption'); ?>" class="nav1-link">
                 <p class="nav-p"><i class="material-icons">account_balance</i>Hall Rervations</p>         
             </a>
         </li> 

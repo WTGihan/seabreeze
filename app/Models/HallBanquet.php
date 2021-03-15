@@ -59,6 +59,8 @@ class HallBanquet extends Connection {
         return $result;
     }
 
+    
+
     public function getOneHalleView($id) {
         $this->banquet_hall_id = mysqli_real_escape_string($this->connection, $id);
         $hall[] = array();
@@ -125,13 +127,101 @@ class HallBanquet extends Connection {
         date_default_timezone_set("Asia/Colombo");
         $current_date = date('Y-m-d');
         $hall = "hall";
+        $customer = new Customer();
+        $customer_table = $customer->customer_table;
 
-        $query = "SELECT $hall.name,  $hall.price,
+        $query = "SELECT $hall.name,  $hall.price, $customer_table.first_name, $customer_table.email,
                   $this->banquet_table.session_date, $this->banquet_table.session_type, $this->banquet_table.id, $this->banquet_table.hall_id
                   FROM $this->banquet_table
                   INNER JOIN $hall
                   ON  $this->banquet_table.hall_id = $hall.id
+                  INNER JOIN $customer_table
+                  ON $this->banquet_table.customer_id = $customer_table.customer_id
                   WHERE $this->banquet_table.is_valid = 1 AND $this->banquet_table.request = 1 AND $this->banquet_table.session_date >= '{$current_date}'
+                  ORDER BY $this->banquet_table.session_date";
+
+        $rooms = mysqli_query($this->connection, $query);
+        if($rooms) {
+            mysqli_fetch_all($rooms,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+    return $rooms;
+    }
+
+    public function requestNotificationSearch($search) {
+        $search = mysqli_real_escape_string($this->connection, $search);
+        date_default_timezone_set("Asia/Colombo");
+        $current_date = date('Y-m-d');
+        $hall = "hall";
+        $customer = new Customer();
+        $customer_table = $customer->customer_table;
+
+        $query = "SELECT $hall.name,  $hall.price, $customer_table.first_name, $customer_table.email,
+                  $this->banquet_table.session_date, $this->banquet_table.session_type, $this->banquet_table.id, $this->banquet_table.hall_id
+                  FROM $this->banquet_table
+                  INNER JOIN $hall
+                  ON  $this->banquet_table.hall_id = $hall.id
+                  INNER JOIN $customer_table
+                  ON $this->banquet_table.customer_id = $customer_table.customer_id
+                  WHERE $hall.name  LIKE '%{$search}%' AND $this->banquet_table.is_valid = 1 AND $this->banquet_table.request = 1 AND $this->banquet_table.session_date >= '{$current_date}'
+                  ORDER BY $this->banquet_table.session_date";
+
+        $rooms = mysqli_query($this->connection, $query);
+        if($rooms) {
+            mysqli_fetch_all($rooms,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+    return $rooms;
+    }
+
+    public function allReservationDetails() {
+        $hall = "hall";
+        $customer = new Customer();
+        $customer_table = $customer->customer_table;
+
+        $query = "SELECT $hall.name,  $hall.price, $customer_table.first_name, $customer_table.email,
+                  $this->banquet_table.session_date, $this->banquet_table.session_type, $this->banquet_table.id, $this->banquet_table.hall_id
+                  FROM $this->banquet_table
+                  INNER JOIN $hall
+                  ON  $this->banquet_table.hall_id = $hall.id
+                  INNER JOIN $customer_table
+                  ON $this->banquet_table.customer_id = $customer_table.customer_id
+                  WHERE $this->banquet_table.is_valid = 1 AND $this->banquet_table.request = 0 
+                  ORDER BY $this->banquet_table.session_date";
+
+        $rooms = mysqli_query($this->connection, $query);
+        if($rooms) {
+            mysqli_fetch_all($rooms,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+    return $rooms;
+    }
+
+    public function allReservationDetailsSearch($search) {
+
+        $search = mysqli_real_escape_string($this->connection, $search);
+        $hall = "hall";
+        $customer = new Customer();
+        $customer_table = $customer->customer_table;
+
+        $query = "SELECT $hall.name,  $hall.price, $customer_table.first_name, $customer_table.email,
+                  $this->banquet_table.session_date, $this->banquet_table.session_type, $this->banquet_table.id, $this->banquet_table.hall_id
+                  FROM $this->banquet_table
+                  INNER JOIN $hall
+                  ON  $this->banquet_table.hall_id = $hall.id
+                  INNER JOIN $customer_table
+                  ON $this->banquet_table.customer_id = $customer_table.customer_id
+                  WHERE $hall.name  LIKE '%{$search}%' AND
+                  $this->banquet_table.is_valid = 1 AND $this->banquet_table.request = 0 
                   ORDER BY $this->banquet_table.session_date";
 
         $rooms = mysqli_query($this->connection, $query);
