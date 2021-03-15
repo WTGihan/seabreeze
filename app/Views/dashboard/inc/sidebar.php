@@ -56,14 +56,31 @@
             </a>
         </li> 
 
-        <!-- <li class="nav1-item">
+        <li class="nav1-item">
 
             <a href="<?php url('payment/option'); ?>" class="nav1-link">
                 <p class="nav-p"><i class="material-icons">paid</i>Payments</p>         
 
             </a>
-        </li>  -->
+        </li> 
     
+        <li class="nav1-item">
+            
+            <a href="<?php url('food/index'); ?>" class="nav1-link">
+
+                <p class="nav-p"><i class="material-icons">restaurant</i>Food Order Manage</p>   
+            </a>
+            
+        </li>
+
+        <li class="nav1-item">
+            
+            <a href="<?php url('food/viewFood'); ?>" class="nav1-link">
+
+                <p class="nav-p"><i class="material-icons">brunch_dining</i>View Food Order</p>   
+            </a>
+            
+        </li>
         <li class="nav1-item">
 
             <a href="<?php url('editweb/index'); ?>" class="nav1-link">
@@ -81,17 +98,6 @@
 
             </a>
         </li> 
-        
-
-        <li class="nav1-item">
-            
-            <a href="<?php url('food/index'); ?>" class="nav1-link">
-
-                <p class="nav-p"><i class="material-icons">restaurant</i>Food Order Manage</p>   
-            </a>
-            
-        </li>
-
 
         <li class="nav1-item">
             <a href="<?php url(''); ?>" class="nav1-link">

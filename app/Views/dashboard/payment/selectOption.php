@@ -40,7 +40,7 @@
                             <div class="text">
                                 Cash Payments
                             </div>
-                            <a href="<?php url('payment/cashIndex');?>"></a>
+                            <a href="<?php url('Pay/paymanual');?>"></a>
                         </div>
 
                         <div class="horBadge">
@@ -50,7 +50,7 @@
                             <div class="text">
                                 Online Payments
                             </div>
-                            <a href="<?php url('notification/checkInMark');?>"></a>
+                            <a href="<?php url('paymentM/checkInMark');?>"></a>
                         </div>
 
                         <div class="horBadge">

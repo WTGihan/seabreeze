@@ -104,7 +104,7 @@ li {
 
 a.nav1-link {
   display: block;
-  margin: 10px 15px 0;
+  margin: 8px 15px 0;
   border-radius: 3px;
   padding: 10px 15px;
   /* margin-top: 0px; */
@@ -128,8 +128,8 @@ a.nav1-link {
 .nav-p {
   display: block;
   margin: 0;
-  font-size: 16px;
-  line-height: 30px;
+  font-size: 14px;
+  line-height: 25px;
   font-weight: 100;
   height: auto;
   justify-content: center;
@@ -142,7 +142,7 @@ a:hover > p {
 }
 
 i.material-icons {
-  font-size: 24px;
+  font-size: 22px;
   float: left;
   margin-right: 15px;
   width: 30px;
