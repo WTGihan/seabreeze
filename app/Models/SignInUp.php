@@ -10,7 +10,7 @@ class SignInUp {
         $dbhost = 'localhost';
         $dbuser = 'root';
         $dbpass = '';
-        $dbname = 'seabreeze';
+        $dbname = 'bayfront_hotel';
 
         $this->connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     }

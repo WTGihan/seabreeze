@@ -29,21 +29,25 @@ class Profile extends Connection {
                     LIMIT 1";
         $customer = mysqli_query($this->connection, $query1);
         $row = mysqli_fetch_assoc($customer);
-        $customer_id = $row['customer_id'];
         
-        $query = "SELECT * FROM $this->reservation_table
-                  WHERE customer_id = '{$customer_id}' AND is_valid =1";
-// echo $query;exit;
-        $reservations = mysqli_query($this->connection, $query);
-        if($reservations) {
-            $reservations= mysqli_fetch_all($reservations,MYSQLI_ASSOC);
-        }
-        else {
-            echo "Database Query Failed";
-        }    
+        
+        if($row!= NULL){
+            $customer_id = $row['customer_id'];
+            $query = "SELECT * FROM $this->reservation_table
+            WHERE customer_id = '{$customer_id}' AND is_valid =1";
+            // echo $query;exit;
+            $reservations = mysqli_query($this->connection, $query);
+            if($reservations) {
+                $reservations= mysqli_fetch_all($reservations,MYSQLI_ASSOC);
+            }
+            else {
+                echo "Database Query Failed";
+            }    
 
-// var_dump($reservations); exit;
-        return $reservations;
+            // var_dump($reservations); exit;
+            return $reservations;
+        }
+       
 
     }
 
@@ -78,19 +82,6 @@ class Profile extends Connection {
     return $rooms;    
     }
 
-    public function addReview($reservation_id, $star, $review) {
-        
-        $query = "UPDATE $this->reservation_table SET $this->reservation_table.is_feedback = '1', $this->reservation_table.	guest_review = '{$review}', $this->reservation_table.rating ='{$star}'
-                  WHERE $this->reservation_table.reservation_id = {$reservation_id} AND $this->reservation_table.is_checkout = 1 LIMIT 1";
-        // echo $query; exit;
-        $result = mysqli_query($this->connection, $query);
-        
-        $value =0;
-        if($result) {
-            $value = 1;
-        }
-        return $value;
-    }
     
     public function getDeclineReservation($reservation_id) {
         

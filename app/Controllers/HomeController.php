@@ -21,6 +21,9 @@ session_start();
             // exit;
             $data['img_details'] = $imageRoom;
             
+            $db = new RoomEdit();
+            $data['discount_details'] = $db->getAllDiscount();
+            
             View::load('home', $data);
             
         }
@@ -36,6 +39,8 @@ session_start();
 					$imageRoom =$db->viewRoom();
 					$data['img_details'] = $imageRoom;
             // echo $_SESSION['message'];
+            $db = new RoomEdit();
+            $data['discount_details'] = $db->getAllDiscount();
             View::load('home', $data);
         }
 
@@ -56,6 +61,7 @@ session_start();
         
         public function login()
         {
+            
             $data['errors']= [];
             View::load('login/login' , $data);
         }

@@ -32,17 +32,7 @@
                </div>
                
                     <div class="badgeSec">
-                        <div class="horBadge">
                         
-                            <div class="icon1">
-                                <i class="fas fa-money-check-alt"></i>
-                            </div>
-                            <div class="text">
-                                Cash Payments
-                            </div>
-                            <a href="<?php url('Pay/paymanual');?>"></a>
-                        </div>
-
                         <div class="horBadge">
                             <div class="icon2">
                                 <i class="fas fa-money-check"></i>
@@ -50,7 +40,7 @@
                             <div class="text">
                                 Online Payments
                             </div>
-                            <a href="<?php url('paymentM/checkInMark');?>"></a>
+                            <a href="<?php url('payment/onlineIndex');?>"></a>
                         </div>
 
                         <div class="horBadge">
@@ -60,11 +50,15 @@
                             <div class="text">
                                 Payment Details
                             </div>
-                            <a href="<?php url('notification/checkOutMark');?>"></a>
+                            <a href="<?php url('payment/allIndex');?>"></a>
                         </div>
 
                         
                     </div>
+
+                    <!-- <div class="cardbody"> 
+                        <?php include(VIEWS.'dashboard/room/bookingCalendar.php'); ?>
+                    </div> -->
            </div> 
        </div>
    </div>

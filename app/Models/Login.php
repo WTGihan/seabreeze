@@ -12,7 +12,7 @@ class Login {
         $dbhost = 'localhost';
         $dbuser = 'root';
         $dbpass = '';
-        $dbname = 'seabreeze';
+        $dbname = 'bayfront_hotel';
 
         $data = "tharindu";
 

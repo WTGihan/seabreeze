@@ -49,16 +49,25 @@ class ImageController {
                                 $this->viewImg($room_number);
     
                             }else{
-                                echo "noo";
+                                $errors['img'] = 'Image Not Uploaded';
+                                $data['errors'] = $errors;
+                                $this->viewImg($room_number);
                             }
                         }else{
-                            echo "Your file too big";
+                            $errors['img'] = 'Image File Is Too Small';
+                                $data['errors'] = $errors;
+                                $this->viewImg($room_number);
                         }
                     }else{
-                        echo "There was an error";
+                        $errors['img'] = 'There Is Some Error In Image';
+                            $data['errors'] = $errors;
+                        $this->viewImg($room_number);
+
                     }
                 }else{
-                    echo "Cant allowed";
+                    $errors['img'] = 'Invalid Image Format';
+                        $data['errors'] = $errors;
+                       $this->viewImg($room_number);
                 }
             
             

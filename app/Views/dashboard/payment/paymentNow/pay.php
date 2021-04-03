@@ -141,9 +141,9 @@
                     <div class="window">
 
                         <div class="linkBar">
-                            <a href="<?php url('payment/checkout/0/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']);?>">Guest Details</a>
-                            <a href="<?php url('payment/checkout/1/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']);?>">Room Details</a>
-                            <a href="<?php url('payment/checkout/2/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']);?>">Payment Details</a>
+                            <a href="<?php url('pay/checkout/0/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']);?>">Guest Details</a>
+                            <a href="<?php url('pay/checkout/1/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']);?>">Room Details</a>
+                            <a href="<?php url('pay/checkout/2/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']);?>">Payment Details</a>
                         </div>
 
                         <div class="formSet">
@@ -621,25 +621,35 @@
                                         <tr>
                                             <td class="logo" style="justify-content: left;">
                                             
-                                            <img src="<?php echo BURL.'assets/img/logo.png'; ?>" style="width:100%; max-width:50px;"> 
-                                            <p>Bayfront Hotel</p>
+                                            <img src="<?php echo BURL.'assets/img/basic/logo.png'; ?>" style="width:250px"> 
+                                            <!-- <p>Sea Breeze Hotel</p> -->
                                             </td>
 
                                             <td>
-                                            Invoice #: 12353<br> Created: January 1, 2015<br> Due: February 1, 2015
+                                            Invoice #:<?php echo(rand(10000,900000)); ?> <br>
+                                            <?php
+                                                echo "Created: ".$reservation['check_in_date'];
+                                            ?>
+                                            <br> 
+                                            <?php
+                                                date_default_timezone_set("Asia/Kolkata"); 
+                                                $Due = date("Y-m-d");
+                                                echo "Due: ".$Due;
+
+                                            ?>
                                             </td>
                                         </tr>
                                         </table>
                                     </td>
                                     </tr>
-
+                                    
                                     <tr class="information">
                                     <td colspan="4">
                                         <table>
                                         <tr>
                                             <td>
 
-                                            502, Bypass road,<br> Weligama, <br> Sri Lanka
+                                            155, Galle Road,<br> Urawaththa, Ambalangoda <br> Sri Lanka
                                             </td>
 
                                             <td>
@@ -656,33 +666,13 @@
                                     </td>
                                     </tr>
 
-                                    <!-- <tr class="heading">
-                                    <td colspan="3">
-                                        Payment Method
-                                    </td>
-
-                                    <td>
-                                        Check #
-                                    </td>
-                                    </tr>
-
-                                    <tr class="details">
-                                    <td colspan="3">
-                                        Check
-                                    </td>
-
-                                    <td>
-                                        1000
-                                    </td>
-                                    </tr> -->
-
                                     <tr class="heading">
                                     <td>
                                         #Title   
                                     </td>
 
                                     <td>
-                                       Room Rate
+                                       Room Rate(LKR)
                                     </td>
 
                                     <td>
@@ -690,13 +680,14 @@
                                     </td>
 
                                     <td>
-                                        Price
+                                        Price(LKR)
                                     </td>
                                     </tr>
-
+                                    <tr>
+                                    <td></td></tr>
                                     <tr class="item">
                                     <td>
-                                       
+                                    <?php echo $room['room_number']; ?>
                                     </td>
 
                                     <td>
@@ -704,69 +695,73 @@
                                     </td>
 
                                     <td>
-                                       
+                                       <?php 
+                                        $date1=date_create($reservation['check_in_date']);
+                                        $date2=date_create($reservation['check_out_date']);
+                                        $diff=date_diff($date1,$date2);
+                                        // echo $diff->format("%R%a days");
+                                        // exit;
+                                    if(isset($diff)){
+                                            echo $diff->format("%a nights");
+                                        }
+                                       ?>
                                     </td>
 
                                     <td>
+                                    <?php 
                                         
+                                        $date1=date_create($reservation['check_in_date']);
+                                        $date2=date_create($reservation['check_out_date']);
+                                        $diff=date_diff($date1,$date2);
+                                        // echo $diff;
+                                        // exit;
+                                    if(isset($diff)){
+                                            echo $diff->format("%a")*$room['price'];
+                                        } 
+                                        
+                                    
+                                    ?>
+                                    
                                     </td>
                                     </tr>
-
-                                    <tr class="item">
-                                    <td>
-                                        <input value="Hosting (3 months)" />
-                                    </td>
-
-                                    <td>
-                                        $<input type="number" value="75" />
-                                    </td>
-
-                                    <td>
-                                        <input type="number" value="1" />
-                                    </td>
-
-                                    <td>
-                                        $75.00
-                                    </td>
-                                    </tr>
-
-                                    <tr class="item">
-                                    <td>
-                                        <input value="Domain name (1 year)" />
-                                    </td>
-
-                                    <td>
-                                        $<input type="number" value="10" />
-                                    </td>
-
-                                    <td>
-                                        <input type="number" value="1" />
-                                    </td>
-
-                                    <td>
-                                        $10.00
-                                    </td>
-                                    </tr>
-
                                     <tr>
-                                    <td colspan="4">
-                                        <button class="btn-add-row">Add row</button>
-                                    </td>
-                                    </tr>
-
-                                    <tr class="total">
-                                    <td colspan="3"></td>
-
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Total:</strong></td>
                                     <td>
-                                        Total: $385.00
+                                    <?php 
+                                        
+                                        $date1=date_create($reservation['check_in_date']);
+                                        $date2=date_create($reservation['check_out_date']);
+                                        $diff=date_diff($date1,$date2);
+                                        // echo $diff;
+                                        // exit;
+                                    if(isset($diff)){
+                                            echo $diff->format("%a")*$room['price'];
+                                        }
+                                        
+                                    
+                                    ?>
                                     </td>
                                     </tr>
+                                    
+                                    </tr>
+                                    <tr>
+                            <td></td>
+                            </tr>
+                            </tr>
+                            <tr class="total">
+                            <td ></td>
+                            <td ></td>
+                            <td >Signature</td>
+                            <td>
+                               ........................
+                            </td>
+                            </tr>
                                 </table>
                         </div>
                         <div class="row">
-                            <div class="button">
-                                <a href="<?php url("payment/billprint"); ?>" class="save" name="">Pay Bill</a>
-                            </div>
+                                <a href="<?php url('report/printBills/'.$room['room_number'].'/'.$reservation['check_in_date'].'/'.$reservation['check_out_date']); ?>" class="save" name="">Pay Bill</a>
                         </div>
                     </div>
 

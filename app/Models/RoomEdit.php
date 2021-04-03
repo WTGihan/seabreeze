@@ -4,7 +4,7 @@ class RoomEdit{
 
     private $table1 = "room_details";
     private $table2 = "room_type";
-    private $table3 = "hotel_room";
+    private $table3 = "room_discount";
     private $conn;
 
     public function __construct() {
@@ -12,15 +12,40 @@ class RoomEdit{
         $dbhost = 'localhost';
         $dbuser = 'root';
         $dbpass = '';
-        $dbname = 'seabreeze';
+        $dbname = 'bayfront_hotel';
 
         $this->connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     }
 
+    public function getAllDiscount() {
+
+
+        $query = "SELECT * FROM  $this->table3";
+
+        // echo $query;  
+        // exit();  
+        $room_discount = mysqli_query($this->connection, $query);
+        // var_dump($rooms);
+        if($room_discount) {
+            $room_discount =mysqli_fetch_all($room_discount,MYSQLI_ASSOC);
+        
+            // var_dump($rooms);
+            // exit();
+            return $room_discount;
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+        
+    }
+
+
+
     public function getAllRoom() {
 
 
-        $query = "SELECT $this->table1.room_number, $this->table1.room_id, $this->table1.room_name, $this->table1.room_view, $this->table1.price,
+        $query = "SELECT $this->table1.room_number, $this->table1.room_id, $this->table1.room_name, $this->table1.room_view, $this->table1.price, $this->table1.free_canselaration,
                   $this->table2.type_name 
                   FROM $this->table1
                   INNER JOIN $this->table2 ON $this->table1.type_id = $this->table2.room_type_id AND $this->table1.is_delete = 0";
@@ -78,7 +103,7 @@ class RoomEdit{
         $result = mysqli_query($this->connection, $sql);
 
         if($result) {
-            // query successful.. redirecting to users page
+            
             return 1;
         }else{
             return 0;

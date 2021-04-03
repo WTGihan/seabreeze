@@ -7,6 +7,98 @@
 	<title>SEA BREEZE HOTEL</title>
 
 </head>
+<style>
+
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+  .slideshow { 
+    position:relative;
+    width:100%; }
+    
+  .slideshow .track { 
+    display:table; 
+    width:100%;
+    margin:0 auto;
+    height:70vh; 
+    text-align:center;
+    overflow:hidden; }
+
+  .isSlide { 
+    height:100%; 
+    position:relative;
+    display:none; text-align:left; }
+
+  .isSlide.active { 
+    display:table-cell;
+    vertical-align:top; 
+    height:70vh; 
+    width:auto; max-width:100%; 
+    animation: fadeIn ease 0.4s; }
+
+  .isSlide img { 
+    display:block; 
+    height:96%; max-width:100%; 
+    width:auto; margin:0 auto; 
+    z-index:0; }
+
+  .btnPrevSlide, .btnNextSlide { 
+    display:block; 
+    position:absolute; top:50%;
+    width:40px; height:40px; margin-top:-20px; 
+    border-radius:50%; 
+    padding:0; 
+    min-width:0; }
+
+  .btnNextSlide { right:5px; }
+  .btnPrevSlide { left:5px; }
+
+  .btnNextSlide i.material-icons,
+  .btnPrevSlide i.material-icons {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center; 
+    left:0; }
+
+  .pagination-dots { 
+    display:table; 
+    width:auto; 
+    list-style:none; 
+    padding:0; 
+    margin:0 auto; 
+    z-index:11; }
+
+  .pagination-dots button { 
+    display:table-cell; 
+    width:20px; height:20px; }
+    
+  .btnDot {
+    font-size:0; line-height:0; color:transparent;
+    background:none; filter:none; border:none;
+    display: block; width: 20px; height: 20px;  
+    cursor: pointer; }
+
+  .btnDot .dot {
+    display:block;
+    width:8px; height:8px; 
+    margin:0 auto; 
+    border-radius:50%;
+    background-color: #fff; 
+
+  .btnDot.active .dot { 
+    background-color:#fff; }
+
+  .btnDot:focus { 
+    outline:0; }
+</style>
 <body>
 	<?php 
 	
@@ -77,8 +169,44 @@
       
    					</div>
    				
-   			
-			</div>
+					   <div class="slideshow containerSlideshow">
+
+							<div class="track">
+
+								<div class="slide isSlide active">
+								<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-A.jpg' ?>" alt="">
+								</div>
+
+								<div class="slide isSlide">
+								<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-B.jpg' ?>" alt="">   
+								</div>
+
+								<div class="slide isSlide">
+								<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-C.jpg' ?>" alt="">
+								</div>
+
+								<div class="slide isSlide">
+								<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-D.jpg' ?>" alt="">
+								</div>
+
+								<div class="slide isSlide">
+								<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-E.jpg' ?>" alt="">
+								</div>
+
+								<div class="slide isSlide">
+								<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-F.jpg' ?>" alt="">
+								</div>      
+
+							</div><!--end track-->
+
+							<button type="button" class="btnPrevSlide collapse"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+							<button type="button" class="btnNextSlide collapse"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+
+							<div class="isPagination pagination-dots collapse"></div>
+
+
+						</div><!--end slideshow-->
+					</div>
 
 			<div class="second">
 				<?php include(VIEWS.'inc/banquet-catogery.php'); ?>
@@ -139,7 +267,43 @@
    					</div>
    				</div>
    			</div>
+			   <div class="slideshow containerSlideshow">
 
+<div class="track">
+
+	<div class="slide isSlide active">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-A.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-B.jpg' ?>" alt="">   
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-C.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-D.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-E.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-F.jpg' ?>" alt="">
+	</div>      
+
+</div><!--end track-->
+
+<button type="button" class="btnPrevSlide collapse"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+<button type="button" class="btnNextSlide collapse"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+
+<div class="isPagination pagination-dots collapse"></div>
+
+
+</div><!--end slideshow-->
 			</div>
 			<div class="second">
 				<?php include(VIEWS.'inc/banquet-catogery.php'); ?>
@@ -199,7 +363,43 @@
    					</div>
    				</div>
    			</div>
+			   <div class="slideshow containerSlideshow">
 
+<div class="track">
+
+	<div class="slide isSlide active">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-A.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-B.jpg' ?>" alt="">   
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-C.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-D.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-E.jpg' ?>" alt="">
+	</div>
+
+	<div class="slide isSlide">
+	<img src="<?php echo BURL.'assets/img/banquet/LunchDinner-F.jpg' ?>" alt="">
+	</div>      
+
+</div><!--end track-->
+
+<button type="button" class="btnPrevSlide collapse"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+<button type="button" class="btnNextSlide collapse"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+
+<div class="isPagination pagination-dots collapse"></div>
+
+
+</div><!--end slideshow-->
 			</div>
 			<div class="second">
 				<?php include(VIEWS.'inc/banquet-catogery.php'); ?>
@@ -224,6 +424,62 @@
 		// console.log(navbar);
 		navbar.classList.toggle("sticky");
 	};
+
+
+	$(".containerSlideshow").each(createSlideshow);
+
+function createSlideshow(i, elem) {
+
+  var slideshow = $(elem);
+  var count = slideshow.find(".isSlide").length;
+  var pagination = slideshow.find(".isPagination");
+  var backButton = slideshow.find(".btnPrevSlide");
+  var nextButton = slideshow.find(".btnNextSlide");
+
+  if (count > 1) {
+
+    pagination.removeClass("collapse");
+    backButton.removeClass("collapse");
+    nextButton.removeClass("collapse");
+
+    function gotoSlide(n) {
+      slideshow.find(".isSlide").removeClass("active").fadeOut(500);
+      pagination.find(".btnDot").removeClass("active");
+      pagination.find(".btnDot").eq(n).addClass("active");
+      slideshow.find(".isSlide").eq(n).addClass("active").fadeIn(500);
+    }
+
+    //create pagination dots
+
+    for (var i = 0, len = count; i < len; i++) {
+      pagination.append(
+        '<button type="button" class="btnDot"><i class="dot"></i></button>'
+      );
+      pagination.find(".btnDot").eq(0).addClass("active");
+    }
+
+    //click function for dots
+    $(".btnDot").click(function() {
+      var dot = $(this).parent().index();
+      gotoSlide(dot);
+    });
+
+
+    //back & next buttons
+    backButton.click(function() {
+      var prev = slideshow.find(".isSlide.active").index() - 1;
+      gotoSlide(prev);
+    });
+
+    nextButton.click(function() {
+      var next = slideshow.find(".isSlide.active").index() + 1;
+      if (next == count) next = 0;
+      gotoSlide(next);
+    });
+
+  }
+
+}
 	</script>
 </body>
 </html>

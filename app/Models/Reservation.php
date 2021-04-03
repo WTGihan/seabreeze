@@ -28,6 +28,7 @@ class Reservation extends Connection {
         Connection::__construct();
     }
 
+    
     public function setCheckInOutDate($check_in_date, $check_out_date) {
         $this->reservation_check_in_date = mysqli_real_escape_string($this->connection, $check_in_date);
         $this->reservation_check_out_date = mysqli_real_escape_string($this->connection, $check_out_date);
@@ -51,7 +52,7 @@ class Reservation extends Connection {
         $query ="SELECT  $room->room_table.room_id, $room->room_table.room_number,
                  $this->reservation_table.check_in_date, $this->reservation_table.check_out_date
                  FROM $room->room_table LEFT OUTER JOIN $this->reservation_table  ON $room->room_table.room_id = $this->reservation_table.room_id
-                 WHERE $room->room_table.room_number = '{$room->room_number}' AND $this->reservation_table.is_valid = 1 AND
+                 WHERE $room->room_table.room_number = '{$room->room_number}' AND $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND
                  (($this->reservation_table.check_in_date >= '{$current_date}' AND $this->reservation_table.check_in_date <= '{$this->check_in_date}'  AND  $this->reservation_table.check_out_date > '{$this->check_in_date}') OR 
                  ($this->reservation_table.check_in_date <= '{$this->check_in_date}'  AND  $this->reservation_table.check_out_date >= '{$this->check_in_date}') OR 
                  ($this->reservation_table.check_in_date <= '{$this->check_out_date}'  AND  $this->reservation_table.check_out_date >= '{$this->check_out_date}'))
@@ -72,68 +73,9 @@ class Reservation extends Connection {
     return $value;  
     }
 
-    // public function getEmail($email) {
-
-    //     $email = mysqli_real_escape_string($this->connection, $email);
-    //     $query = "SELECT * FROM $this->table1
-    //               WHERE email = '{$email}'
-    //               LIMIT 1";
-    //     $result = 0;
-    //     $result_set = mysqli_query($this->connection, $query);
-    //     if($result_set){
-    //         if(mysqli_num_rows($result_set) == 1) {
-    //             $result = 1;
-    //         }
-    //     }
-    //     else {
-    //         echo "Query Error";
-    //     }
-    //     return $result;
-    // }
-
-    public function getCreditCardNumber($credit_card_number) {
-
-        $credit_card_number = mysqli_real_escape_string($this->connection, $credit_card_number);
-        $query = "SELECT * FROM $this->table4 
-                  WHERE credit_card_number = '{$credit_card_number}'
-                  LIMIT 1";
-
-        $result = 0;
-        $result_set = mysqli_query($this->connection, $query);
-        if($result_set){
-            if(mysqli_num_rows($result_set) == 1) {
-                $result = 1;
-            }
-        }
-        else {
-            echo "Query Error";
-        }
-        return $result;
-    }
 
 
-    // public function getCreateCustomer($data) {
-    //     $value = 0;
-    //     $first_name = mysqli_real_escape_string($this->connection, $data[0]);
-    //     $last_name = mysqli_real_escape_string($this->connection, $data[1]);
-    //     $location = mysqli_real_escape_string($this->connection, $data[2]);
-    //     $contact_num = mysqli_real_escape_string($this->connection, $data[3]);
-    //     $age = mysqli_real_escape_string($this->connection, $data[4]);
-    //     $email = mysqli_real_escape_string($this->connection, $data[5]);
-
-    //     $query = "INSERT INTO $this->table1 (
-    //               first_name, last_name, location, contact_number, age, email) 
-    //               VALUES (
-    //              '{$first_name}', '{$last_name}', '{$location}', '{$contact_num}', '{$age}', '{$email}'
-    //               )";
-        
-    //     $result = mysqli_query($this->connection, $query);
-    //     if($result) {
-    //         // query successful.. redirecting to users page
-    //         $value = 1;
-    //     }
-    //     return $value;
-    // }
+ 
 
     public function getCreateReservation($data) {
         $value = 0;
@@ -176,115 +118,9 @@ class Reservation extends Connection {
     }
 
 
-    public function getAllCustomerPdf() {
-
-        $query = "SELECT first_name,last_name,location,contact_number,age,email FROM $this->table1";
+  
 
 
-
-
-        $users = mysqli_query($this->connection, $query);
-        if($users) {
-            $users=mysqli_fetch_all($users,MYSQLI_ASSOC);
-        }
-        else {
-            echo "Database Query Failed";
-        }    
-//var_dump($users);
-//exit;
-    return $users;    
-    }
-
-
-
-
-    public function getAllReservationPdf() {
-
-        $query = "SELECT first_name,last_name,contact_number,age,email,check_in_date,check_out_date,no_of_guest,payment_method
-        FROM $this->table1
-        INNER JOIN $this->table3
-        ON $this->table1.customer_id = $this->table3.customer_id";
-
-
-
-
-        $users = mysqli_query($this->connection, $query);
-        if($users) {
-            $users=mysqli_fetch_all($users,MYSQLI_ASSOC);
-        }
-        else {
-            echo "Database Query Failed";
-        }    
-//var_dump($users);
-//exit;
-    return $users;    
-    }
-
-
-
-    public function getAllPaymentPdf() {
-
-        $query = "SELECT first_name,last_name,contact_number,email,credit_card_number,expire_month,expire_year,cvv 
-        FROM $this->table1 
-        INNER JOIN $this->table4 ON $this->table1.customer_id = $this->table4.customer_id";
-
-
-        $users = mysqli_query($this->connection, $query);
-        if($users) {
-            $users=mysqli_fetch_all($users,MYSQLI_ASSOC);
-        }
-        else {
-            echo "Database Query Failed";
-        }    
-//var_dump($users);
-//exit;
-    return $users;    
-    }
-
-
-
-
-    // public function getCustomerID($email) {
-
-
-    //     $email = mysqli_real_escape_string($this->connection, $email);
-
-    //     $query = "SELECT * FROM $this->table1
-    //               WHERE email = '{$email}'
-    //               LIMIT 1";
-    //     $customers = mysqli_query($this->connection, $query);
-    //     if($customers){
-    //         if(mysqli_num_rows($customers) == 1) {
-    //             $customer = mysqli_fetch_assoc($customers);
-    //         }
-    //     }
-    //     else {
-    //         echo "Query Error";
-    //     }
-
-    //     return $customer;
-    // }
-
-    // public function getRoomID($room_number) {
-
-    //     $room_number = mysqli_real_escape_string($this->connection, $room_number);
-    //     $room = array();
-    //     $query = "SELECT * FROM $this->table2
-    //               WHERE room_number = '{$room_number}'
-    //               LIMIT 1";
-
-    //     $rooms = mysqli_query($this->connection, $query);
-    //     if($rooms){
-    //         if(mysqli_num_rows($rooms) == 1) {
-    //             $room = mysqli_fetch_assoc($rooms);
-    //         }
-    //     }
-    //     else {
-    //         echo "Query Error";
-    //     }
-
-    //     return $room;
-    // }
 
     public function getReservationDetails($room_id, $check_in_date, $check_out_date) {
 
@@ -312,63 +148,10 @@ class Reservation extends Connection {
         return $reservation;
     }
 
-    // public function getCustomer($customer_id) {
-    //     $customer_id = mysqli_real_escape_string($this->connection, $customer_id);
+ 
 
-    //     $query = "SELECT * FROM $this->table1
-    //               WHERE customer_id = '{$customer_id}'
-    //               LIMIT 1";
-    //     $customers = mysqli_query($this->connection, $query);
-    //     if($customers){
-    //         if(mysqli_num_rows($customers) == 1) {
-    //             $customer = mysqli_fetch_assoc($customers);
-    //         }
-    //     }
-    //     else {
-    //         echo "Query Error";
-    //     }
+  
 
-    //     return $customer;
-    // }
-
-    // public function getReception($reception_user_id) {
-    //     $reception_user_id = mysqli_real_escape_string($this->connection, $reception_user_id);
-
-    //     $query = "SELECT * FROM $this->table5
-    //               WHERE reception_user_id = '{$reception_user_id}'
-    //               LIMIT 1";
-    //     $receptions = mysqli_query($this->connection, $query);
-    //     if($receptions){
-    //         if(mysqli_num_rows($receptions) == 1) {
-    //             $reception = mysqli_fetch_assoc($receptions);
-    //             // echo "Sucess";
-    //         }
-    //     }
-    //     else {
-    //         echo "Query Error";
-    //     }
-
-    //     return $reception;
-    // }
-
-    // public function getRoomType($room_type_id) {
-    //     $room_type_id = mysqli_real_escape_string($this->connection, $room_type_id);
-
-    //     $query = "SELECT * FROM $this->table6
-    //               WHERE room_type_id = '{$room_type_id}'getCreateReservation
-    //               LIMIT 1";
-    //     $types = mysqli_query($this->connection, $query);
-    //     if($types){
-    //         if(mysqli_num_rows($types) == 1) {
-    //             $type = mysqli_fetch_assoc($types);
-    //         }
-    //     }
-    //     else {
-    //         echo "Query Error";
-    //     }
-
-    //     return $type;
-    // }
     
     public function reservationDetails($reservation_id) {
 
@@ -377,7 +160,8 @@ class Reservation extends Connection {
         $query = "SELECT * FROM $this->reservation_table
                   WHERE reservation_id = '{$this->reservation_id}' AND $this->reservation_table.is_valid = 1
                   LIMIT 1";
-
+        // var_dump($query);
+        // die();
         $reservations = mysqli_query($this->connection, $query);
         if($reservations){
             if(mysqli_num_rows($reservations) == 1) {
@@ -387,6 +171,8 @@ class Reservation extends Connection {
         else {
             echo "Query Error";
         }
+        // var_dump($reservation);
+        // die();
 
         return $reservation;
 
@@ -519,7 +305,7 @@ class Reservation extends Connection {
                   LEFT OUTER JOIN $this->reservation_table
                   ON $room->room_table.room_id = $this->reservation_table.room_id
                   WHERE $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0
-                  ORDER BY $this->reservation_table.check_in_date";
+                  ORDER BY $this->reservation_table.check_in_date DESC";
 
         $rooms = mysqli_query($this->connection, $query);
         if($rooms) {
@@ -639,7 +425,7 @@ class Reservation extends Connection {
 
 
         $query = "SELECT $room->room_table.room_number,  $room->room_table.room_name, $room->room_table.price,
-                  $customer->customer_table.first_name,  $customer->customer_table.contact_number,
+                  $customer->customer_table.first_name,  $customer->customer_table.contact_number, $customer->customer_table.customer_id,
                   $this->reservation_table.check_in_date, $this->reservation_table.check_out_date, $this->reservation_table.reservation_id, $this->reservation_table.check_out_status
                   FROM $this->reservation_table
                   LEFT OUTER JOIN $room->room_table
@@ -711,7 +497,7 @@ class Reservation extends Connection {
         $customer->customer_contact_number = mysqli_real_escape_string($this->connection, $search);
 
         $query ="SELECT $room->room_table.room_number,  $room->room_table.room_name, $room->room_table.price,
-                $customer->customer_table.first_name,  $customer->customer_table.contact_number,
+                $customer->customer_table.first_name,  $customer->customer_table.contact_number, $customer->customer_table.customer_id,
                 $this->reservation_table.check_in_date, $this->reservation_table.check_out_date, $this->reservation_table.reservation_id, $this->reservation_table.check_out_status
                 FROM $this->reservation_table
                 LEFT OUTER JOIN $room->room_table
@@ -838,66 +624,467 @@ class Reservation extends Connection {
     }
 
 
-
-    public function getreportt()
-    {
-     
-     // echo $d1;
-     // exit;
- 
-     $query="SELECT first_name,last_name,contact_number,age,email,location,no_of_guest,payment_method,check_in_date,check_out_date
-      FROM reservation INNER JOIN customer on reservation.customer_id=customer.customer_id
-     order BY check_in_date";
-     // echo $query;
-     // exit;
-     $users = mysqli_query($this->connection, $query);
-         if($users) {
-             $users=mysqli_fetch_all($users,MYSQLI_ASSOC);
-         }
-         else {
-             echo "Database Query Failed";
-         }    
- //var_dump($users);
- //exit;
-     return $users; 
-    }
-
-    public function searchBanquet($id, $session_date, $session_type) {
-        $this->banquet_hall_id = mysqli_real_escape_string($this->connection, $id);
-        $this->banquet_session_date = mysqli_real_escape_string($this->connection, $session_date);
+    public function getCountReservation() {
+        date_default_timezone_set("Asia/Colombo");
+        $current_date = date('Y-m-d');
         
-        echo "tharindu";
-        die();
-        if($session_type === "both" ) {
-            $session_type1 = "morning";
-            $session_type2 = "evening";
-            $session_type3 = "both";
-            $query = "SELECT * FROM $this->banquet_table
-                WHERE hall_id = '{$this->banquet_hall_id}' and 
-                session_date = '{$this->banquet_session_date}' and 
-                (session_type = '{$session_type1}' OR  session_type = '{$session_type2}' OR session_type = '{$session_type3}')
-                LIMIT 1";
+        $query = "SELECT COUNT($this->reservation_table.reservation_id) AS count, $this->reservation_table.check_in_date 
+                FROM $this->reservation_table 
+                WHERE check_in_date <= '{$current_date}' AND $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0
+                GROUP BY check_in_date DESC LIMIT 14";
+        // var_dump($query);
+        // die();
+        $reservationsCount = mysqli_query($this->connection, $query);
+        if($reservationsCount) {
+            mysqli_fetch_all($reservationsCount,MYSQLI_ASSOC);
         }
         else {
-            $this->banquet_session_type = mysqli_real_escape_string($this->connection, $session_type);
-            $query = "SELECT * FROM $this->banquet_table
-                WHERE hall_id = '{$this->banquet_hall_id}' and 
-                session_date = '{$this->banquet_session_date}' and 
-                session_type = '{$this->banquet_session_type}'  
-                LIMIT 1";
-        }
+            echo "Database Query Failed";
+        } 
 
-        $result = 0;
-        $result_set = mysqli_query($this->connection, $query);
-        if($result_set){
-            if(mysqli_num_rows($result_set) == 1) {
-                $result = 1;
+        return $reservationsCount;
+    }
+
+    public function getDayCountReservation() {
+
+        $query = "SELECT COUNT($this->reservation_table.reservation_id) AS count, $this->reservation_table.check_in_date 
+                FROM $this->reservation_table 
+                WHERE $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0
+                GROUP BY check_in_date";
+
+        $reservationsCount = mysqli_query($this->connection, $query);
+        if($reservationsCount) {
+            mysqli_fetch_all($reservationsCount,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        } 
+
+        return $reservationsCount;
+    }
+
+    public function getBookingDays($room_id) {
+
+        date_default_timezone_set("Asia/Colombo");
+        $current_date = date('Y-m-d');
+
+        $room = new RoomDetails();
+        $room->room_id = mysqli_real_escape_string($this->connection, $room_id);
+
+        $query = "SELECT check_in_date, check_out_date  
+                FROM $this->reservation_table 
+                WHERE $this->reservation_table.room_id = '{$room->room_id}' AND $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0
+                ORDER BY check_in_date";
+
+        $reservationsDays = mysqli_query($this->connection, $query);
+
+        if($reservationsDays) {
+            mysqli_fetch_all($reservationsDays,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        } 
+
+        return $reservationsDays;
+
+    }
+
+    public function getReservationsCheckOutDays($customer_id) {
+
+        $room = new RoomDetails();
+        $room_type = new RoomType();
+        $room_discount = new RoomDiscount();
+
+        $room->room_table; //table2
+        // $room_type->room_type_table;
+        $room_discount->room_discount_table;
+        $customer = new Customer();
+        $customer->customer_id = mysqli_real_escape_string($this->connection, $customer_id);
+
+        date_default_timezone_set("Asia/Colombo");
+        $current_date = date('Y-m-d');
+
+        
+        $query = "SELECT $room->room_table.room_name, $room->room_table.price,
+                  $room_discount->room_discount_table.discount_rate, $room_discount->room_discount_table.start_date, $room_discount->room_discount_table.end_date,               
+                  $this->reservation_table.check_in_date, $this->reservation_table.check_out_date, $this->reservation_table.reservation_id, $this->reservation_table.payment_method
+                  FROM $room->room_table
+                  INNER JOIN $room_discount->room_discount_table
+                  ON  $room->room_table.type_id = $room_discount->room_discount_table.room_type_id
+                  INNER JOIN $this->reservation_table
+                  ON $room->room_table.room_id = $this->reservation_table.room_id
+                  WHERE $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND $this->reservation_table.check_out_date = '{$current_date}' AND  $this->reservation_table.customer_id = '{$customer->customer_id}'
+                  ORDER BY $this->reservation_table.check_in_date";
+
+        // Have to do query
+        // print_r($query);
+        // die();
+        $reservations = mysqli_query($this->connection, $query);
+        if($reservations) {
+            mysqli_fetch_all($reservations,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+        return $reservations;
+
+
+    }
+
+    // report Queries
+
+    public function getCountCustomers($start_date, $end_date) {
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.customer_id) as count
+                FROM $this->reservation_table
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 LIMIT 1";
+        
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
             }
         }
         else {
             echo "Query Error";
         }
+
+        return $result;
+
+    }
+
+
+    public function getCountCheckedInCustomers($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.customer_id) as count FROM $this->reservation_table
+                WHERE  $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND $this->reservation_table.check_in_status IS NOT NULL AND 
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 LIMIT 1";
+        
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
         return $result;
     }
+
+    public function getCountCheckedInNotCustomers($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.customer_id) as count FROM $this->reservation_table
+                WHERE  $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND $this->reservation_table.check_in_status IS NULL AND 
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 LIMIT 1";
+        
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
+        return $result;
+    }
+
+    public function getMostReservationCustomers($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $customer = new Customer();
+        $customer->customer_table;
+
+        $query = "SELECT $customer->customer_table.first_name, $customer->customer_table.last_name , 
+                $this->reservation_table.customer_id , COUNT($this->reservation_table.reservation_id) as count 
+                FROM $this->reservation_table 
+                INNER JOIN $customer->customer_table ON $customer->customer_table.customer_id = $this->reservation_table.customer_id 
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND
+                $this->reservation_table.check_in_status IS NOT NULL GROUP BY customer_id";
+
+        $result = mysqli_query($this->connection, $query);
+        if($result) {
+            mysqli_fetch_all($result,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+        return $result;
+    }
+
+    public function getMostReservationReception($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $reception = new Reception();
+        $employee = new Employee();
+        $reception->reception_table;
+        $employee->employee_table;
+
+        $query = "SELECT $employee->employee_table.first_name, $employee->employee_table.last_name , 
+                $this->reservation_table.reception_user_id , COUNT($this->reservation_table.reservation_id) as count 
+                FROM $reception->reception_table 
+                INNER JOIN $this->reservation_table ON $reception->reception_table.reception_user_id = $this->reservation_table.reception_user_id 
+                INNER JOIN $employee->employee_table ON $reception->reception_table.emp_id = $employee->employee_table.emp_id 
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND
+                $this->reservation_table.check_in_status IS NOT NULL AND $employee->employee_table.is_deleted=0 AND $reception->reception_table.is_deleted= 0 GROUP BY $this->reservation_table.reception_user_id";
+
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        if($result) {
+            mysqli_fetch_all($result,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+        return $result;
+    }
+
+    public function getCountAllReservations($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.reservation_id) as count
+                FROM $this->reservation_table
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND
+                $this->reservation_table.is_valid = 1 LIMIT 1";
+        
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
+        return $result;
+    }
+
+    public function getCountAllAcceptReservations($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.reservation_id) as count
+                FROM $this->reservation_table
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 LIMIT 1";
+        
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
+        return $result;
+    }
+
+    public function getCountAllCheckedInReservations($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.reservation_id) as count
+                FROM $this->reservation_table
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND $this->reservation_table.check_in_status IS NOT NULL LIMIT 1";
+        
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
+        return $result;
+    }
+
+    public function getCountAllWalkingGuestReservations($start_date, $end_date) {
+
+        //  count walking guest and for get online reservations
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+        $this->reservation_payment_method = "CASH";
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.reservation_id) as count
+                FROM $this->reservation_table
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND $this->reservation_table.payment_method = '{$this->reservation_payment_method}' LIMIT 1";
+        
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
+        return $result;
+    }
+
+    public function getCountAllOnlinePaymentReservations($start_date, $end_date) {
+
+        //  count walking guest and for get online reservations
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+        $this->reservation_payment_method = "ONLINEONLINE";
+
+        $query = "SELECT COUNT(DISTINCT $this->reservation_table.reservation_id) as count
+                FROM $this->reservation_table
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND
+                $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND $this->reservation_table.payment_method = '{$this->reservation_payment_method}' LIMIT 1";
+        
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        
+        if($result){
+            if(mysqli_num_rows($result) == 1) {
+                $result = mysqli_fetch_assoc($result);
+            }
+        }
+        else {
+            echo "Query Error";
+        }
+
+        return $result;
+    }
+
+    public function getMostReservationIncomeRoom($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $room = new RoomDetails();
+        $room->room_table;
+
+        $query = "SELECT $room->room_table.room_name, COUNT($this->reservation_table.reservation_id) as count 
+                FROM $this->reservation_table 
+                INNER JOIN $room->room_table ON $room->room_table.room_id = $this->reservation_table.room_id 
+                WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND
+                $this->reservation_table.check_in_status IS NOT NULL AND $room->room_table.is_delete= 0 GROUP BY $this->reservation_table.room_id";
+
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        if($result) {
+            mysqli_fetch_all($result,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+
+        return $result;
+    }
+
+    public function getExpectReservationIncome($start_date, $end_date) {
+
+        $start_date = mysqli_real_escape_string($this->connection, $start_date);
+        $end_date = mysqli_real_escape_string($this->connection, $end_date);
+
+        $room = new RoomDetails();
+        $room_type = new RoomType();
+        $room_discount = new RoomDiscount();
+
+        $room->room_table; //table2
+        // $room_type->room_type_table;
+        $room_discount->room_discount_table;
+      
+
+        date_default_timezone_set("Asia/Colombo");
+        $current_date = date('Y-m-d');
+
+        
+        $query = "SELECT $room->room_table.price,
+                  $room_discount->room_discount_table.discount_rate, $room_discount->room_discount_table.start_date, $room_discount->room_discount_table.end_date,
+                  $this->reservation_table.check_in_date, $this->reservation_table.check_out_date, $this->reservation_table.reservation_id,  $this->reservation_table.customer_id
+                  FROM $room->room_table
+                  INNER JOIN $room_discount->room_discount_table
+                  ON  $room->room_table.type_id = $room_discount->room_discount_table.room_type_id
+                  INNER JOIN $this->reservation_table
+                  ON $room->room_table.room_id = $this->reservation_table.room_id
+                  WHERE $this->reservation_table.check_in_date >= '{$start_date}' AND $this->reservation_table.check_in_date <= '{$end_date}' AND 
+                  $this->reservation_table.is_valid = 1 AND $this->reservation_table.request = 0 AND $room->room_table.is_delete = 0
+                  ORDER BY $this->reservation_table.check_in_date";
+
+        // var_dump($query);
+        $result = mysqli_query($this->connection, $query);
+        if($result) {
+            mysqli_fetch_all($result,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        }    
+        return $result;
+
+
+    }
+
+    public function getAllReservation($customer_id) {
+        $customer = new Customer();
+        $customer->customer_id;
+        $customer->customer_id = mysqli_real_escape_string($this->connection, $customer_id);
+
+        $query = "SELECT * FROM $this->reservation_table
+                  WHERE customer_id = '{$customer->customer_id}' AND is_valid = 1 AND request = 0";
+
+        $result = mysqli_query($this->connection, $query);
+        // var_dump($query);
+        // die();
+        if($result) {
+            mysqli_fetch_all($result,MYSQLI_ASSOC);
+        }
+        else {
+            echo "Database Query Failed";
+        } 
+
+        return $result;
+    }
+    
+
+    
+
+
+
+    
 
 }

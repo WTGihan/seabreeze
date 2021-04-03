@@ -1,5 +1,3 @@
-
-
 <?php 
 unset($_POST);
 $_POST = array();
@@ -10,8 +8,8 @@ $_POST = array();
 ?>
 
 <div class="wrapper">
-      
-   <?php 
+
+    <?php 
    
        $navbar_title = "Edit Image Page";
        $search = 0;
@@ -27,21 +25,23 @@ $_POST = array();
             <div class="card">
                 <div class="cardheader">
                     <div class="options">
-                        <h4><?php echo $room_number." "; ?>Edit Image Page   
-                        <span>
-                            <a href="<?php url("editweb/index"); ?>" class="addnew"><i class="material-icons">arrow_back</i>Back To Rooms Table</a>  
-                        </span> 
+                        <h4><?php echo $room_number." "; ?>Edit Image Page
+                            <span>
+                                <a href="<?php url("editweb/index"); ?>" class="addnew"><i
+                                        class="material-icons">reply_all</i></a>
+                            </span>
                         </h4>
                     </div>
                     <p class="textfortabel">Image Views Following Room</p>
                 </div>
-                
+
                 <h4 class="imgh1">Full Room View</h4>
 
                 <div class="sadara">
-                
+
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_01/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_01/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -56,34 +56,39 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
-                                    <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"> <span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
+                                        <label class="addFile"> <span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
 
-                    <!-- Change phase -->
+
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_02/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_02/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -98,41 +103,52 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
-                                        
+
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
-                                            <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                                <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
                                     </div>
-                                    
+
 
                                 </div>
-                                
+
                                 <div class="line2">
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
+                        <div class="line">
+                            <?php if((isset($errors['img'])) ): ?>
+                            <p class=""><i class="material-icons">info</i><?php echo $errors['img']; ?></p>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    
-                    <!--End of Change phase -->
-                    
+
+
+
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_03/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_03/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -147,46 +163,52 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><span><i class="material-icons "
+                                                        style="margin-right:0px">publish</i> Select File</span>
+                                                <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                    required>
                                         </label>
 
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
                                         <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                            <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
 
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                    
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
                 </div>
 
-                    <h4 class="imgh1">Washroom View</h4>
-                    <div class="sadara"> 
+                <h4 class="imgh1">Washroom View</h4>
+                <div class="sadara">
 
-                    
+
 
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_04/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_04/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -201,39 +223,45 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
 
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
                                         <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                            <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                    
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
 
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_05/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_05/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -248,40 +276,46 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
-                                    <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                    <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                        <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
-                                    </label>
-                                    
-                                    <?php if (isset($img_details[$count-1]['image_path'])):?>
-                                    <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                        <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
-                                    <?php endif; ?>
+                                        <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
+                                        </label>
+
+                                        <?php if (isset($img_details[$count-1]['image_path'])):?>
+                                        <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                    
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
 
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_06/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_06/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -296,44 +330,50 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
                                         <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                            <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
 
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="line2">
-                                
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
-                    </div>
+                </div>
 
-                    <h4 class="imgh1">Room  Facility</h4>
-                    <div class="sadara">
-                    
+                <h4 class="imgh1">Room Facility</h4>
+                <div class="sadara">
+
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_07/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_07/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -348,39 +388,45 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
                                         <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                            <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="line2">
-                                
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
 
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_08/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_08/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -395,44 +441,50 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
-                                    <div class="line3">
-                                    <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                    <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                        <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
-                                    </label>
 
-                                    <?php if (isset($img_details[$count-1]['image_path'])):?>
-                                    <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                        <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
-                                    <?php endif; ?>
+                                    <div class="line3">
+                                        <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
+                                        </label>
+
+                                        <?php if (isset($img_details[$count-1]['image_path'])):?>
+                                        <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
-                    </div>
+                </div>
 
-                    <h4 class="imgh1">Other</h4>
-                    <div class="sadara"> 
-                    
+                <h4 class="imgh1">Other</h4>
+                <div class="sadara">
+
 
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_09/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_09/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -447,38 +499,44 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
                                         <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                            <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
                     </div>
 
                     <div class="line">
-                        <form action="<?php url("image/uploadImg/image_10/$room_number"); ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php url("image/uploadImg/image_10/$room_number"); ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="imgLine">
                                 <div class="line1">
                                     <?php 
@@ -493,62 +551,65 @@ $_POST = array();
                                                 }
                                             }
                                     ?>
-                                    
+
                                     <?php  if ($count == 0): ?>
-                                        <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.'assets/img/addImg.svg'; ?>"
+                                        alt="Placeholder">
                                     <?php else : ?>
 
-                                        <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>" alt="Placeholder">
+                                    <img id="previewImg" src="<?php echo BURL.$img_details[$count-1]['image_path']; ?>"
+                                        alt="Placeholder">
                                     <?php endif;  ?>
-                                            
+
                                     <div class="line3">
                                         <!-- <input type="file" name="file"  onchange="previewFile(this);" required> -->
-                                        <label class="addFile"><span><i class="material-icons " style = "margin-right:0px">publish</i>  Select File</span>
-                                            <input  type="file" name="file" size="60" onchange="previewFile(this);" required>
+                                        <label class="addFile"><span><i class="material-icons "
+                                                    style="margin-right:0px">publish</i> Select File</span>
+                                            <input type="file" name="file" size="60" onchange="previewFile(this);"
+                                                required>
                                         </label>
                                         <?php if (isset($img_details[$count-1]['image_path'])):?>
                                         <?php $img = explode('/',$img_details[$count-1]['image_path']); $img= end($img);?>
-                                            <a class="btnDel" href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>"  >Delete</a>
+                                        <a class="btnDel"
+                                            href="<?php url('image/deleteImg/'.$room_number.'/'.$img); ?>">Delete</a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                                
+
                                 <div class="line2">
-                                
-                                    
-                                    <input class="submitBtn1" type="submit"  name="submit" value="Save">
+
+
+                                    <input class="submitBtn1" type="submit" name="submit" value="Save">
                                 </div>
-                                    
+
                             </div>
                         </form>
 
-                        </div>
-                    </form>
                     </div>
+                    </form>
                 </div>
+            </div>
 
 
-            </div> 
         </div>
     </div>
-</div>   
+</div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    
-
 function previewFile(input) {
 
     console.log(input);
     var file = input.files[0];
     console.log(file);
-  
-    if(file){
+
+    if (file) {
         var reader = new FileReader();
-        reader.onload = function(){
+        reader.onload = function() {
             $(input).closest('.imgLine').find('#previewImg').attr("src", reader.result);
         }
-            reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     }
 }
 </script>
