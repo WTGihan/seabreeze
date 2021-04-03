@@ -9,7 +9,7 @@ class CustomerController {
             $dashboard->index();
         }
         else {
-            view::load("dashboard/customer/selectOption");
+            view::load('dashboard/customer/selectOption');
         }
     }
 
@@ -65,6 +65,8 @@ class CustomerController {
             
         }
     }
+
+    
 
     public function blacklistDetails($customer_id) {
         if(!isset($_SESSION['user_id'])) {

@@ -1,6 +1,3 @@
-<style>
-
-</style>
 <?php 
 
 // Header
@@ -53,6 +50,10 @@
                             <a href="<?php url('employee/index');?>"></a>
                         </div>
                     </div>
+
+                    <!-- <div class="cardbody"> 
+                        <?php include(VIEWS.'dashboard/room/bookingCalendar.php'); ?>
+                    </div> -->
            </div> 
        </div>
    </div>

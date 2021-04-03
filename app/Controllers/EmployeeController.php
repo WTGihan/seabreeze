@@ -5,13 +5,32 @@ class EmployeeController {
 
 
 
-    public function option() {
+    public function option($month_val=0, $year_val=0) {
         if(!isset($_SESSION['user_id'])) {
             $dashboard = new DashboardController();
             $dashboard->index();
         }
         else {
-            view::load('dashboard/employee/selectOption');
+            date_default_timezone_set("Asia/Colombo");
+            $dateComponents = getdate();
+    
+            if($month_val != 0 && $year_val != 0) {
+                $month = $month_val;
+                $year = $year_val;
+            }
+            else {
+                // $month = $dateComponents['month'];
+                $month = date('m');
+                // $year = $dateComponents['year'];
+                $year = date('Y');
+            }
+            $class = "employee";
+            $method = "option";
+            $dashboard = new DashboardController();
+            $calendar = $dashboard->bookingCalendarDetails($month, $year, $class, $method);
+            $data['calendar'] = $calendar;
+            view::load('dashboard/employee/selectOption',$data);
+
         }
     }
 
@@ -111,7 +130,10 @@ class EmployeeController {
                 // Checking max length
                 $max_len_fields = array('first_name' => 50, 'last_name' => 100, 'email' => 100, 'salary' => 10, 'location' => 50, 'contact_num' => 10);
                 $errors = array_merge($errors, $this->check_max_len($max_len_fields));
-    
+                
+                if($post == "") {
+                    $errors['post'] = 'Select the Post!!';
+                }
                 // check First Name is valid
                 if(!$this->is_valid($_POST['first_name'])) {
                     $errors['first_name'] = 'First Name is Invalid';

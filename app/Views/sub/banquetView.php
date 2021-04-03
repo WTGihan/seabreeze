@@ -4,26 +4,26 @@
 
 	<meta charset="UTF-8">
 	<link rel="icon" type="image/png" href="<?php echo BURL.'assets/img/basic/favicon.png'; ?>" />
+	<script type="text/javascript" src="<?php echo BURL.'assets/js/alert.js'; ?>"></script>
 	<title>SEA BREEZE HOTEL</title>
 
 </head>
 <body>
-	<?php 
-	
-		if(isset($errors) && !empty($errors)) {
-			echo '<script>alert("Enter Data is invalid")</script>';
-		}
-		
-		else {
-			if(isset($msg2)) {
-				echo '<script>alert("'.$msg2.'")</script>';
-			}
-			if(isset($roomAvailable['availability']) && $roomAvailable['availability'] == 0) {
-				echo '<script>alert("Hall is Not Available")</script>'; 
-			}
-		}
-				
-	?>
+
+<?php	if(isset($errors) && !empty($errors)) { ?>
+        <button style="display:none;" id="error-state"
+            onclick="customAlert.alert('Enter Data is invalid')">
+        </button>
+    <?php } else { ?>
+    <?php	if(isset($msg2)) {?>
+        <button style="display:none;" id="error-state"
+            onclick="customAlert.alert('Plaese login then Reserve Room')">
+        </button>
+    <?php }if(isset($roomAvailable['availability']) && $roomAvailable['availability'] == 0) { ?>
+        <button style="display:none;" id="error-state"
+            onclick="customAlert.alert('Hall is Not Available')">
+        </button>
+    <?php }} ?>
 
 	<?php include(VIEWS.'inc/header_navbar.php'); ?>
 
@@ -58,7 +58,7 @@
 						<dt>PRICES:</dt>
 						<dd>25000  LKR</dd>
 					</dl>
-					<a class="btn" href="">BOOK NOW <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+					<!-- <a class="btn" href="">BOOK NOW <i class="fa fa-chevron-right" aria-hidden="true"></i></a> -->
 				</div>
 				
 			</div>
@@ -116,7 +116,7 @@
 						<dt>PRICES:</dt>
 						<dd>25000  LKR</dd>
 					</dl>
-					<a class="btn" href="">BOOK NOW <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+					<!-- <a class="btn" href="">BOOK NOW <i class="fa fa-chevron-right" aria-hidden="true"></i></a> -->
 				</div>
 				
 			</div>
@@ -176,7 +176,7 @@
 						<dt>PRICES:</dt>
 						<dd>25000  LKR</dd>
 					</dl>
-					<a class="btn" href="">BOOK NOW <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+					
 				</div>
 				
 			</div>
@@ -225,5 +225,12 @@
 		navbar.classList.toggle("sticky");
 	};
 	</script>
+
+<script>
+    if (document.getElementById('error-state')) {
+        console.log("shhshdhsdh");
+        document.getElementById('error-state').click();
+    }
+    </script>
 </body>
 </html>

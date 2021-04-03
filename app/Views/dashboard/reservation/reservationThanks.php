@@ -1,133 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="<?php echo BURL.'assets/img/basic/favicon.png'; ?>" />
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <title>reservationThanks</title>
-</head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600&display=swap');
+    <html lang="en">
 
-    * {
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+        <title>Document</title>
+    </head>
+    <style>
+    ul {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
     }
 
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: #f5f5f5;
+    ul li {
+        padding: 0;
+    }
+
+    .multi-steps {
+        display: table;
+        table-layout: fixed;
+        width: 800px;
+        margin: 30px auto;
+    }
+
+    .multi-steps>li {
+        text-align: center;
+        display: table-cell;
+        position: relative;
+        font-size: 18px;
+        color: #000;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .multi-steps>li:before {
+        content: "\26AC";
+        display: block;
+        margin: 0 auto;
+        background-color: #fff;
+        font-size: 30px;
+        font-weight: 600;
+        width: 60px;
+        height: 60px;
+        color: #737272;
+        line-height: 60px;
+        text-align: center;
+        font-weight: bold;
+        border-width: 7px;
+        border-style: solid;
+        border-color: #0088ff;
+        border-radius: 50%;
+        z-index: 500;
+    }
+
+    .multi-steps>li:after {
+        content: "";
+        height: 10px;
+        width: 250px;
+        background-color: #0088ff;
+        position: absolute;
+        top: 30px;
+        z-index: -1;
+    }
+
+    .multi-steps>li:last-child:after {
+        display: none;
+    }
+
+    .multi-steps>li.select:before {
+        background-color: #000;
+        border-color: #000;
+        font-family: FontAwesome;
+        content: "\f0c1";
+        color: #fff;
+    }
+
+    .multi-steps>li.first:before {
+        font-family: FontAwesome;
+        content: "\f674";
+    }
+
+    .multi-steps>li.second:before {
+        font-family: FontAwesome;
+        content: "\f0c1";
+    }
+
+    .multi-steps>li.third:before {
+        font-family: FontAwesome;
+        content: "\f00c";
+    }
+
+    .card {
+        /*background: #fff;*/
+        height: auto;
+        padding-top: 20px;
+        padding-bottom: 50px;
+        margin: 50px auto;
+        text-align: center;
+        position: relative;
+        width: 800px;
+        border-radius: 47px;
+        background: #D24040;
+        /*z-index: -10;*/
+    }
+
+    .card-3 {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     }
 
     .btn {
-        position: relative;
-        padding: 15px 20px;
-        background: #fff;
-        font-size: 18px;
-        display: inline-block;
-        text-decoration: none;
-        color: #1d2124;
+        width: 250px;
+        background-color: #5995fd;
+        border: none;
+        outline: none;
+        height: 49px;
+        border-radius: 10px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 10px 0;
         cursor: pointer;
-        font-weight: 500;
-        letter-spacing: 2px;
         transition: 0.5s;
+        /*z-index: 5;*/
     }
 
     .btn:hover {
-        letter-spacing: 4px;
+        background-color: #4d84e2;
     }
 
-    #popup {
-        top: 50%;
-        left: 50%;
-        z-index: 1000;
-        background: rgb(255, 255, 255);
-        width: 450px;
-        padding: 80px 50px 50px;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.88);
-        transition: 0.5s;
-    }
-
-    
-
-    #popup .content {
-        position: relative;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    #popup .content img {
-        max-width: 200px;
-    }
-
-    #popup .content h2 {
-        font-size: 24px;
-        font-weight: 500;
-        color: #333333;
-        margin: 20px 0 10px;
-    }
-
-    #popup .content p {
+    .input-field {
+        width: 250px;
+        background-color: #f0f0f0;
+        margin: 0 auto;
+        height: 55px;
+        border-radius: 10px;
+        display: grid;
         text-align: center;
-        font-size: 16px;
-        color: #333333;
-    }
-
-    #popup .content .inputBox {
+        grid-template-columns: 15% 85%;
+        padding: 0 0.4rem;
         position: relative;
-        width: 100%;
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        /*z-index: 50;*/
     }
 
-    
+    .input-field i {
+        text-align: center;
+        line-height: 55px;
+        color: #acacac;
+        transition: 0.5s;
+        font-size: 1.1rem;
+    }
 
-    /* mycase for redesign */
-    #popup .content .inputBox a { 
-        max-width: 150px;
-        background: rgb(37, 89, 173);
-        color: #fff;
+    .input-field input {
+        background: none;
+        outline: none;
         border: none;
+        line-height: 1;
+        font-weight: 500;
+        font-size: 1.1rem;
+        color: #333;
+        /*z-index: 10;*/
     }
 
-    .close {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        cursor: pointer;
+    .alert {
+        width: 500px;
+        height: 50px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 40px;
+        font-size: 18px;
+        margin: 0 auto;
+        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 15px;
     }
 
-    .close img {
-        max-width: 26px;
+    /*.close-alert {
+  color: #000000;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+.close-alert:hover {
+  color: #000000;
+  background: #f1f1f1;
+  border-radius: 50%;
+}*/
+    .successful.alert {
+        border-left: 6px solid #111311;
+        /* background: white; */
+        box-shadow: none;
     }
-</style>
-<body>
 
-    <div id="popup">
-        <div class="content">
-            <img src="<?php echo BURL.'assets/img/thanks/email.png'; ?>" alt="">
-            <h2>Reservation Thanks</h2>
-            <p>Thanks You For Reservation and Wait For The Accept. </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae libero, magnam velit laudantium veniam cumque!</p>    
-            <div class="inputBox">
-                <a href="<?php url("home/index"); ?>" class="btn">Website</a>
+    .successful.alert:before {
+        content: "\2713";
+        color: #111311;
+        font-size: 25px;
+        font-family: "boxicons" !important;
+        font-weight: normal;
+        font-style: normal;
+        font-variant: normal;
+        line-height: 1;
+        display: inline-block;
+        text-transform: none;
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 10px;
+    }
+
+
+    .error.alert {
+        border-left: 6px solid #ff0000;
+        background: white;
+        text-align: left;
+    }
+
+    .error.alert:before {
+        content: "\2612";
+        color: #ff0000;
+        font-size: 25px;
+        font-family: "boxicons" !important;
+        font-weight: normal;
+        font-style: normal;
+        font-variant: normal;
+        line-height: 1;
+        display: inline-block;
+        text-transform: none;
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 10px;
+    }
+
+    .image {
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+
+    .image img {
+        width: 500px;
+        height: 400px;
+        margin: 0 auto;
+        margin-left: -100px;
+        margin-top: -100px;
+    }
+    </style>
+
+    <body>
+
+        <div class="card card-3">
+            <!-- <div class="raw">
+			<ul class="list-unstyled multi-steps">
+			    <li class="first">Send</li>
+			    <li class="second select">Check</li>
+			    <li class="third">Reset</li>
+			 </ul>
+	  	</div> -->
+            <h1>Awaiting Email Confirmation</h1>
+            <div class="image">
+                <img src="<?php echo BURL.'assets/img/Thankyou.gif'; ?>" alt="">
+            </div>
+
+            <div class="alert successful" role="alert">
+                <p>Thank you For Reservation and wait for Accept</p>
             </div>
         </div>
-    </div>
 
-</body>
-</html>
+    </body>
 
-
-
+    </html>

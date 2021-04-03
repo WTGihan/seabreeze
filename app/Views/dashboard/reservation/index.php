@@ -25,13 +25,17 @@
            <div class="card">
                <div class="cardheader">
                    <div class="options">
-                       <h4>All Room Reservations Page  
+                       <h4>All Room Reservations  
                        <span>
+                            <a href="<?php url("reservation/allReservationOptions"); ?>" class="addnew"><i class="material-icons">reply_all</i></a>  
                             <?php if($_SESSION['user_level'] != "Owner"): ?>
                                 <a href="<?php url("reservation/index"); ?>" class="addnew"><i class="material-icons">add_circle</i></a> 
                             <?php endif; ?>
                             <a href="<?php url("reservation/details"); ?>" class="refresh"><i class="material-icons">loop</i></a> 
                        </span> 
+                       <div class="notifyclass">
+                            <span class="notifyError" id="notificationReserveMsg"></span>
+                        </div> 
                         
                        </h4>
                    </div>
@@ -112,20 +116,22 @@
 
                                         <td><a href="<?php url('room/details/'.$row['room_number']);?>" class="edit"><i class="material-icons">preview</i></a></td>
                                         <?php if($_SESSION['user_level'] != "Owner" ): ?>
-                                            <?php if($current_date < $row['check_out_date']) { ?>
-                                                <td><a href="#" onclick="return confirm('Can not Do Reservation Sorry!!?');" class="edit"><i class="material-icons">book_online</i></a></td>
+                                            <?php if($current_date <= $row['check_out_date']) { ?>
+                                                <td><a href="#" onclick="canNotReservation()" class="edit"><i class="material-icons">book_online</i></a></td>
                                             <?php } else { ?>
-                                                <td><a href="<?php url('reservation/view/'.$row['room_number'].'/'.$row['max_guest']);?>" onclick="return confirm('Are you sure?');" class="edit"><i class="material-icons">book_online</i></a></td>
+                                                <td><a href="<?php url('reservation/view/'.$row['room_number'].'/'.$row['max_guest']);?>" class="edit"><i class="material-icons">book_online</i></a></td>
                                             <?php }; ?> 
                                             
                                         <?php endif; ?>
                                         <?php if($_SESSION['user_level'] == "Owner"): ?>
                                             <?php if($current_date > $row['check_out_date']) { ?>
-                                                <td><a href="#" onclick="return confirm('Can not Edit Sorry!!');" class="edit"><i class="material-icons">edit</i></a></td>
+                                                <td><a href="#" onclick="canNotEditReservation()" class="edit"><i class="material-icons">edit</i></a></td>
+                                                <td><a href="#" onclick="canNotDeleteReservation()" class="delete"><i class="material-icons">delete</i></a></td>
                                             <?php } else { ?>   
                                                 <td><a href="<?php url('reservation/edit/'.$row['room_number'].'/'.$row['check_in_date'].'/'.$row['check_out_date']);?>" class="edit"><i class="material-icons">edit</i></a></td>
-                                            <?php }; ?>    
-                                            <td><a href="<?php url('reservation/delete/'.$row['room_number'].'/'.$row['check_in_date'].'/'.$row['check_out_date']);?>" onclick="return confirm('Are you sure?');" class="delete"><i class="material-icons">delete</i></a></td>
+                                                <td><a href="<?php url('reservation/delete/'.$row['room_number'].'/'.$row['check_in_date'].'/'.$row['check_out_date']);?>" class="delete"><i class="material-icons">delete</i></a></td>
+                                            <?php } ?>  
+                                            
                                         <?php endif; ?>
                                     </tbody>
                                 <?php endforeach ?> 
@@ -139,5 +145,5 @@
 
 </div>   
    
-
+<script src="<?php echo BURL.'assets/js/main.js'; ?>"></script>
 <?php include(VIEWS.'dashboard/inc/footer.php'); ?>

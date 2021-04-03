@@ -1,16 +1,37 @@
 <?php 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once 'Libs/vendor/autoload.php';
 
 class NotificationController {
 
-    public function option() {
+    public function option($month_val=0, $year_val=0) {
         if(!isset($_SESSION['user_id'])) {
             $dashboard = new DashboardController();
             $dashboard->index();
         }
         else {
-            view::load('dashboard/notification/selectOption');
+            date_default_timezone_set("Asia/Colombo");
+            $dateComponents = getdate();
+    
+            if($month_val != 0 && $year_val != 0) {
+                $month = $month_val;
+                $year = $year_val;
+            }
+            else {
+                // $month = $dateComponents['month'];
+                $month = date('m');
+                // $year = $dateComponents['year'];
+                $year = date('Y');
+            }
+            $class = "notification";
+            $method = "option";
+            $dashboard = new DashboardController();
+            $calendar = $dashboard->bookingCalendarDetails($month, $year, $class, $method);
+            $data['calendar'] = $calendar;
+            view::load('dashboard/notification/selectOption',$data);
+            // view::load('dashboard/notification/selectOption');
         }
     }
 
@@ -25,6 +46,9 @@ class NotificationController {
             $data = array();
             if(isset($_POST['search'])) {
                 $search = $_POST['search'];
+                   // search process should be implemented
+                    // $data['rooms'] = $db->getSearchRoomAll($search);
+                    // view::load('dashboard/reservation/index', $data);
                 $data['rooms'] = $dbreservation->requestNotificationSearch($search);
                 view::load('dashboard/notification/reservationIndex', $data);
 
@@ -92,8 +116,8 @@ class NotificationController {
                     $reservation_id = $reservation['reservation_id'];
                     
                     $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587,'tls'))
-                    ->setUsername('seabreezesrilanka@gmail.com')
-                    ->setPassword('seabreeze123')
+                    ->setUsername('bayfrontweli45@gmail.com')
+                    ->setPassword('Bayfront@1998')
                     ;
             
                     // Create the Mailer using your created Transport
@@ -118,7 +142,7 @@ class NotificationController {
                                 position: relative;
                                 width: 800px;">
                                     <h1>Hi <strong> '. $userName .'</strong></h1>
-                                    <h3 class="top">You recently requested to reset your reservation for your SEABREEZE hotel Use the button below to get Payment it. <strong>Thank you very much for select our hotel for reservation</strong></h3> 
+                                    <h3 class="top">You recently requested to reset your reservation for your BAYFRONT hotel Use the button below to get Payment it. <strong>Thank you very much for select our hotel for reservation</strong></h3> 
                                     <button style="background: #2EE59D; border: none; border-radius: 5px; padding: 10px; "><a style="color: #fff; text-decoration: none; font-size: 20px; " href="http://localhost/MVC/public/reservation/paymentOnline/'.$customer_id.'/'.$reservation_id.'">Payment</a></button>
                                     <p>If not Pay now decline it</p>
                                     <h4>Welcome</h4>
@@ -146,7 +170,7 @@ class NotificationController {
                                 position: relative;
                                 width: 800px;">
                                     <h1>Hi <strong> '. $userName .'</strong></h1>
-                                    <h3 class="top">You recently requested to reset your reservation for your SEABREEZE hotel Use the button below to get Payment it. <strong>Thank you very much for select our hotel for reservation</strong></h3> 
+                                    <h3 class="top">You recently requested to reset your reservation for your BAYFRONT hotel Use the button below to get Payment it. <strong>Thank you very much for select our hotel for reservation</strong></h3> 
                                     <h4>Welcome</h4>
                                     
                                     
@@ -158,7 +182,7 @@ class NotificationController {
 
                         // Create a message
                     $message = (new Swift_Message('Reservation Accepted'))
-                    ->setFrom(['seabreezesrilanka@gmail.com'=> 'SEABREEZE'])
+                    ->setFrom(['bayfrontweli45@gmail.com'=> 'BAYFRONT'])
                     ->setTo([$userEmail])
                     ->setBody($body, 'text/html');
                     
@@ -200,8 +224,8 @@ class NotificationController {
 
             
             $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587,'tls'))
-            ->setUsername('seabreezesrilanka@gmail.com')
-            ->setPassword('seabreeze123')
+            ->setUsername('bayfrontweli45@gmail.com')
+            ->setPassword('Bayfront@1998')
             ;
     
             // Create the Mailer using your created Transport
@@ -238,7 +262,7 @@ class NotificationController {
 
                 // Create a message
             $message = (new Swift_Message('Reservation Accepted'))
-            ->setFrom(['seabreezesrilanka@gmail.com'=> 'SEABREEZE'])
+            ->setFrom(['bayfrontweli45@gmail.com'=> 'BAYFRONT'])
             ->setTo([$userEmail])
             ->setBody($body, 'text/html');
             
@@ -338,4 +362,69 @@ class NotificationController {
             
         }
     }
+
+    public function viewDeparturedCustomer($customer_id) {
+        if(!isset($_SESSION['user_id'])) {
+            $dashboard = new DashboardController();
+            $dashboard->index();
+        }
+
+        else {
+            $dbcustomer = new Customer();
+            $dbpayment = new Payment();
+            
+            $customer = $dbcustomer->getCustomer($customer_id);
+
+            $dbreservation = new Reservation();
+            $reservation = $dbreservation->getReservationsCheckOutDays($customer_id);
+            // get reservation ID
+
+            foreach($reservation as $row) {
+                $reservationIDS[]= $row['reservation_id']; 
+            }
+
+            $totalPaidValue = 0;
+            
+            
+            // echo $length;
+            // die();
+            $length = count($reservationIDS);
+            for($i=0; $i<$length ; $i++) {
+                $paymentValuePaid = 0;
+                $payment_details= $dbpayment->paymentDetails($reservationIDS[$i], $customer_id);
+                if(!empty($payment_details)) {
+                    foreach($payment_details as $row){
+                        // echo $row['amount'];
+                        $paymentValuePaid = $paymentValuePaid + $row['amount'];
+                        // $cash = $cash + 1;
+                    }
+                }
+                else {
+                    $paymentValuePaid = 0;
+                }
+                // echo $paymentValuePaid;
+                // echo "<br>";
+                $paymentValuePaid =  $paymentValuePaid/1000;
+                // echo $paymentValuePaid;
+                // echo "<br>";
+                $totalPaidValue = $totalPaidValue + $paymentValuePaid;
+            }
+            // echo "<br>";
+            // echo $totalPaidValue;
+            // die();
+
+
+            $data = array();
+
+            $data['reservationIDS'] = $reservationIDS;
+            $data['paidValue'] = $totalPaidValue;
+            $data['customer'] = $customer;
+            $data['reservations'] = $reservation;
+            view::load('dashboard/reportpdf/customerBill', $data);
+
+            
+        }
+    }
+
+
 }

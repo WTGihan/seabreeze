@@ -1,6 +1,6 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap');*/
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,9 +8,6 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -131,9 +128,9 @@ p {
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .container {
-    max-width: 720px;
+    max-width: 768px;
   }
 }
 
@@ -160,7 +157,7 @@ p {
 }
 
 .navbarContainer .logo-container img {
-  width: 200px;
+  width: 80px;
   left: 8%;
   top: 0;
 }
@@ -426,7 +423,13 @@ p {
   }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 768px) {
+  .navbarContainer {
+    width: 768px;
+  }
+  header.nav {
+    width: 768px;
+  }
   .hamburger-menu-container {
     display: flex;
   }
@@ -590,7 +593,7 @@ p {
   margin-top: 15px;
 }
 .sticky .logo-container img {
-  width: 140px;
+  width: 55px;
 }
 .sticky .logo-container h3 {
   margin: 5px 10px;
@@ -678,16 +681,19 @@ p {
   border: solid 2px rgba(255, 255, 255, 0.5);
 }
 
+@media (max-width: 768px) {
+  .slideshowContainer {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    height: 70vh;
+    z-index: 1;
+  }
+}
+
 /*footer===========================================================================================================*/
-/* section {
-  width: 100%;
-  display: inline-block;
-  background: #333;
-  height: 3px;
-  text-align: center;
-  font-size: 25px;
-  font-weight: 700;
-} */
+
 .footer-logo {
   width: 120px;
   height: 140px;
@@ -858,20 +864,26 @@ p {
 }
 /* If you don't want the footer to be responsive, remove these media queries */
 
-@media (max-width: 880px) {
+@media (max-width: 768px) {
   .footer-distributed {
     font: bold 14px sans-serif;
+    width: 100%;
   }
-
+  .footer-container {
+    width: 768px;
+  }
   .footer-distributed .footer-left,
   .footer-distributed .footer-center,
   .footer-distributed .footer-right {
     display: block;
-    width: 100%;
+    width: 768px;
     margin-bottom: 40px;
     text-align: center;
   }
-
+  /* 
+  .footer-distributed .footer-left iframe {
+    width: 768px;
+  } */
   .footer-distributed .footer-center i {
     margin-left: 0;
   }
