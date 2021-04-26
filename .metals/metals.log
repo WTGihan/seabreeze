@@ -16,3 +16,4 @@
 [0m2021.04.03 19:50:23 INFO  time: initialize in 3.33s[0m
 [0m2021.04.03 19:50:27 WARN  Build server is not auto-connectable.[0m
 [0m2021.04.03 19:50:27 WARN  no build tool detected in workspace 'C:\xampp\htdocs\seabreeze'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.04.03 22:32:35 INFO  shutting down Metals[0m

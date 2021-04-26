@@ -42,7 +42,7 @@ class HallBanquet extends Connection {
             $query = "SELECT * FROM $this->banquet_table
                 WHERE hall_id = '{$this->banquet_hall_id}' and 
                 session_date = '{$this->banquet_session_date}' and  is_valid = '{$valid}' and request = '{$request_value}' and
-                session_type = '{$this->banquet_session_type}'  OR session_type = '{$session_type3}'
+                (session_type = '{$this->banquet_session_type}'  OR session_type = '{$session_type3}')
                 LIMIT 1";
         }
 

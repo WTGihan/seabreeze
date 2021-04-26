@@ -40,6 +40,12 @@
                 </a>
             </li>
 
+            <li class="nav1-item">
+                <a href="<?php url('newBanquet/search'); ?>" class="nav1-link">
+                    <p class="nav-p"><i class="material-icons">store</i>Banquet Hall</p>
+                </a>
+            </li>
+
 
             <li class="nav1-item">
 
